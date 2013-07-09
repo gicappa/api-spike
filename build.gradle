@@ -1,7 +1,7 @@
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'idea'
-apply plugin: 'rebel'
+//apply plugin: 'rebel'
 
 buildscript {
     repositories {
@@ -20,15 +20,13 @@ repositories {
     mavenCentral()
 }
 
-war.dependsOn(generateRebel)
-
 dependencies {
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.glassfish.jersey.containers:project:2.0'
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.0'
-    runtime 'org.jboss.resteasy:resteasy-jaxrs:3.0.1.Final'
-    runtime 'org.glassfish.jersey.containers:project:2.0'
-    runtime 'org.glassfish.jersey.containers:jersey-container-servlet:2.0'
+//    runtime 'org.jboss.resteasy:resteasy-jaxrs:3.0.1.Final'
+//    runtime 'org.glassfish.jersey.containers:project:2.0'
+//    runtime 'org.glassfish.jersey.containers:jersey-container-servlet:2.0'
     testCompile "junit:junit:4.11"
 }
 
