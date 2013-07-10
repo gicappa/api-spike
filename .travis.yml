@@ -1,0 +1,16 @@
+language: java
+
+install: echo "I don't trust Maven. Gradle FTW!"
+
+script: gradle
+
+jdk:
+ - oraclejdk6
+
+notifications:
+ # See http://about.travis-ci.org/docs/user/build-configuration/ to learn more
+ # about configuring notification recipients and more.
+ email:
+   recipients:
+     - giancarlo.pace@jobrapido.com
+     - emanuele.cantelli@jobrapido.com
