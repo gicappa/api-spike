@@ -9,4 +9,3 @@ The subject of the inspection will be:
 * testing 
 * performances
 
---
