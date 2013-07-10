@@ -2,7 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-    <display-name>jobengine api</display-name>
+    <!--<display-name>jobengine api</display-name>-->
     <!--<servlet>-->
         <!--<servlet-name>Resteasy</servlet-name>-->
         <!--<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>-->
@@ -25,10 +25,20 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>ConfigLiteServices</servlet-name>
         <url-pattern>/jersey-api/*</url-pattern>
     </servlet-mapping>
+
+
+        <!--<servlet>-->
+            <!--<servlet-name>jobengine.api.JobrapidoAPIConfig</servlet-name>-->
+        <!--</servlet>-->
+        <!--<servlet-mapping>-->
+            <!--<servlet-name>jobengine.api.JobrapidoAPIConfig</servlet-name>-->
+            <!--<url-pattern>/antani</url-pattern>-->
+        <!--</servlet-mapping>-->
 
     <!--<filter>-->
         <!--<filter-name>Jersey Filter</filter-name>-->
