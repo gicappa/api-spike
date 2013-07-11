@@ -20,7 +20,7 @@ public class RestfulAdverts {
     @Rule public Destination d = new Destination(this, "http://localhost:8080/rest/");
     @Context private Response response;
 
-    @HttpTest(method = Method.GET, path = "/helloworld")
+    @HttpTest(method = Method.GET, path = "/helloworld/hi")
     public void checkRestfuseOnlineStatus() {
         assertOk(response);
     }
