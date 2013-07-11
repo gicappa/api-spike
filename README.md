@@ -8,4 +8,6 @@ The subject of the inspection will be:
 * authorization
 * testing 
 * performances
+* spring integration
+* api documentation (swagger, wadl, etc...)
 
