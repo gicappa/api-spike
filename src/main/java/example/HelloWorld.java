@@ -1,5 +1,6 @@
 package example;
 
+import com.wordnik.swagger.annotations.Api;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/helloworld")
+@Api(value = "/helloworld", description = "Just say hi!")
 public class HelloWorld {
     public static void main(String[] args) throws IOException {
 
