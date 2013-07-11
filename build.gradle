@@ -1,31 +1,16 @@
-apply plugin: 'war'
-apply plugin: 'jetty'
 apply plugin: 'idea'
-apply plugin: 'rebel'
+apply plugin: 'java'
+apply plugin: 'jetty'
 
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        mavenRepo(name: 'zt-public-snapshots',
-                url: 'http://repos.zeroturnaround.com/nexus/content/groups/zt-public/')
-    }
-
-    dependencies {
-        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.0.3'
-    }
-}
+sourceCompatibility = 1.7
+jettyRun.contextPath = '/'
 
 repositories {
     mavenCentral()
 }
 
-war.dependsOn(generateRebel)
-
 dependencies {
-//    jersey-container-servlet
-    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.glassfish.jersey.containers:project:2.0'
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.0'
-    testCompile "junit:junit:4.11"
+    compile 'org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.0'
 }
