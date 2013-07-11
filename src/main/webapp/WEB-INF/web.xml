@@ -2,8 +2,13 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
+    <servlet>
+        <servlet-name>Bootstrap</servlet-name>
+        <servlet-class>example.Bootstrap</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
@@ -12,8 +17,12 @@
             <param-value>example;search</param-value>
         </init-param>
         <init-param>
-            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:8080/rest/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>0.1</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
