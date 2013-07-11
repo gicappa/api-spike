@@ -13,7 +13,7 @@ import java.util.List;
 public class SearchAPI {
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public SearchResult DoSearch(@QueryParam("q") String query) {
+    public SearchResult doSearch(@QueryParam("q") String query) {
         SearchResult searchResult = new SearchResult();
         searchResult.setTitle(query);
         List<Advert> adverts = new ArrayList<Advert>();

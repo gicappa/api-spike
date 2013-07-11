@@ -1,5 +1,0 @@
-package search
-
-
-class JobSeekerAPI {
-}
