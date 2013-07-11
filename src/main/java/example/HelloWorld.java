@@ -1,6 +1,7 @@
 package example;
 
 import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/helloworld")
 @Api(value = "/helloworld", description = "Just say hi!")
+@Produces({"application/json"})
 public class HelloWorld {
     public static void main(String[] args) throws IOException {
 
@@ -41,10 +43,11 @@ public class HelloWorld {
 
     // The Java method will process HTTP GET requests
     @GET
-    // The Java method will produce content identified by the MIME Media type "text/plain"
-    @Produces("text/plain")
-    public String getClichedMessage() {
+    @Path("/hi")
+    @ApiOperation(value = "Say hi", notes = "Add extra notes here")
+    // The Java method will produce content identified by the MIME Media type "text/plain"@Produces({"application/json"})
+    public String hi() {
         // Return some cliched textual content
-        return "Hello World";
+        return "Hello";
     }
 }
