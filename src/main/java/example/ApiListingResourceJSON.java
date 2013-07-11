@@ -6,7 +6,7 @@ import com.wordnik.swagger.jaxrs.listing.ApiListing;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-@Path("/api-docs")
-@Api("/api-docs")
+@Path("/docs")
+@Api("/docs")
 @Produces({"application/json"})
 public class ApiListingResourceJSON extends ApiListing {}

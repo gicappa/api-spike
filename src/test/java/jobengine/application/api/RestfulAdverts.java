@@ -17,7 +17,7 @@ import static com.eclipsesource.restfuse.Assert.assertOk;
 public class RestfulAdverts {
 
     @ClassRule public static WebServer g = new WebServer();
-    @Rule public Destination d = new Destination(this, "http://localhost:8080/rest/");
+    @Rule public Destination d = new Destination(this, "http://localhost:8080/api/");
     @Context private Response response;
 
     @HttpTest(method = Method.GET, path = "/helloworld/hi")
