@@ -15,14 +15,17 @@ configurations {
 }
 
 dependencies {
+    fileTree(dir: 'libs', includes: ['*.jar'])
+    compile 'ch.qos.logback:logback-classic:1.0.13'
     compile 'org.glassfish.jersey.containers:project:2.0'
     compile 'com.wordnik:swagger-jaxrs_2.9.1:1.2.5'
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.0'
     compile 'com.wordnik:swagger-core_2.9.1:1.2.5'
+    compile 'org.springframework:spring-web:3.2.3.RELEASE'
     runtime 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.2.1'
     providedCompile 'org.eclipse.jetty:jetty-servlet:8.1.9.v20130131'
     testCompile 'com.restfuse:com.eclipsesource.restfuse:1.2.0'
     testCompile 'junit:junit:4.11'
-    testCompile 'org.eclipse.jetty:jetty-servlet:8.1.9.v20130131'
+    testCompile 'org.eclipse.jetty:jetty-webapp:8.1.9.v20130131'
 
 }
