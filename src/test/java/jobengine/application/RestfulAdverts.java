@@ -1,4 +1,4 @@
-package jobengine.application.api;
+package jobengine.application;
 
 import com.eclipsesource.restfuse.Destination;
 import com.eclipsesource.restfuse.HttpJUnitRunner;
@@ -20,9 +20,7 @@ public class RestfulAdverts {
     @Rule public Destination d = new Destination(this, "http://localhost:8080/api/");
     @Context private Response response;
 
-    @HttpTest(method = Method.GET, path = "/helloworld/hi")
-    public void checkRestfuseOnlineStatus() {
-        assertOk(response);
-    }
+    @HttpTest(method = Method.GET, path = "/adverts")
+    public void it_responds_200_to_adverts_resource() { assertOk(response); }
 
 }
