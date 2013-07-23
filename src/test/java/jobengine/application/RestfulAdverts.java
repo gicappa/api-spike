@@ -22,4 +22,7 @@ public class RestfulAdverts {
     @HttpTest(method = Method.GET, path = "/adverts")
     public void it_responds_200_to_adverts_resource() { assertOk(response); }
 
+    @HttpTest(method = Method.GET, path = "/adverts/4")
+    public void it_responds_200_to_a_single_adverts_resource() { assertOk(response); }
+
 }
