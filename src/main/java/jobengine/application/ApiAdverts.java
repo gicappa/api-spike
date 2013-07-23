@@ -32,6 +32,7 @@ class ApiAdverts {
     @ResponseBody
     public Advert show(@PathVariable Long id) {
         logger.debug("api|GET /adverts/{}", id);
+//        RestPreconditions.checkNotNull( id );
         return adverts.viewAdvert(id);
     }
 

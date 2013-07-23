@@ -2,10 +2,13 @@ package jobengine.infrastructure;
 
 import jobengine.domain.Advert;
 import jobengine.domain.AdvertsBase;
+import jobengine.domain.ObjectNotFound;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static java.lang.String.format;
 
 @Component
 public class AdvertPersistence implements AdvertsBase {
@@ -23,6 +26,10 @@ public class AdvertPersistence implements AdvertsBase {
 
     @Override
     public Advert find(Long id) {
-        return find().get(id.intValue());
+        try {
+            return find().get(id.intValue());
+        } catch (Throwable t) {
+            throw new ObjectNotFound(format("Advert[id: %d] not existent", id), t);
+        }
     }
 }
