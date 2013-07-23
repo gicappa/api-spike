@@ -19,7 +19,6 @@ public class RestfulAdverts {
     @ClassRule public static WebServer g = new WebServer();
     @Rule public Destination d = new Destination(this, "http://localhost:8080/api/");
     @Context private Response response;
-
     @HttpTest(method = Method.GET, path = "/adverts")
     public void it_responds_200_to_adverts_resource() { assertOk(response); }
 
