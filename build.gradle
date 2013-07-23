@@ -6,13 +6,6 @@ sourceCompatibility = 1.6
 jettyRun.contextPath = '/'
 
 repositories { mavenCentral() }
-//
-//configurations {
-//    all*.exclude group: 'com.sun.jersey'
-//    all*.exclude group: 'javax.inject', module: 'javax.inject', version: '1'
-//    all*.exclude module: 'jsr311-api'
-//
-//}
 
 dependencies {
     compile 'ch.qos.logback:logback-classic:1.0.13'
@@ -20,10 +13,35 @@ dependencies {
     compile 'com.mangofactory:swagger-springmvc:0.5.3'
     runtime 'com.fasterxml.jackson.core:jackson-databind:2.2.2'
     runtime 'javax.xml.bind:jaxb-api:2.2.9'
+
     providedCompile 'org.eclipse.jetty:jetty-servlet:8.1.9.v20130131'
+
     testCompile 'com.restfuse:com.eclipsesource.restfuse:1.2.0'
     testCompile 'junit:junit:4.11'
     testCompile 'org.eclipse.jetty:jetty-webapp:8.1.9.v20130131'
     testCompile 'org.springframework:spring-test:3.2.3.RELEASE'
-
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenRepo name: 'Bintray', url: 'http://dl.bintray.com/content/aalmiray/kordamp'
+    }
+    dependencies {
+        classpath 'org.kordamp:markdown-gradle-plugin:0.1'
+    }
+}
+
+apply plugin: 'markdown'
+
+war {
+    from('build/gen-html') {
+        into('/')
+    }
+}
+
+war.dependsOn markdownToHtml
+
+defaultTasks 'war'
+
+

@@ -22,5 +22,4 @@ class ApiAdverts {
     public List<Advert> search(String what, String where) {
         return adverts.search(what, where);
     }
-
 }
