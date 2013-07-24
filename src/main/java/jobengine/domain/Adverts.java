@@ -15,22 +15,22 @@ public interface Adverts {
     public class AdvertsDefault implements Adverts {
 
         @Autowired
-        private AdvertsBase advertsBase;
+        private AdvertsPersistence advertsPersistence;
 
         public List<Advert> search(String what, String where) {
-            return advertsBase.find();
+            return advertsPersistence.find();
         }
 
         public List<Advert> search(String what, String where, Integer radius) {
-            return advertsBase.find();
+            return advertsPersistence.find();
         }
 
         public List<Advert> search(String what, String where, Integer radius, Page page) {
-            return advertsBase.find();
+            return advertsPersistence.find();
         }
 
         public Advert viewAdvert(Long id) {
-            return advertsBase.find(id);
+            return advertsPersistence.find(id);
         }
     }
 }

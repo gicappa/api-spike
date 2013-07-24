@@ -1,7 +1,7 @@
 package jobengine.infrastructure;
 
 import jobengine.domain.Advert;
-import jobengine.domain.AdvertsBase;
+import jobengine.domain.AdvertsPersistence;
 import jobengine.domain.ObjectNotFound;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import static java.lang.String.format;
 
 @Component
-public class AdvertPersistence implements AdvertsBase {
+public class AdvertFakePersistence implements AdvertsPersistence {
     @Override
     public List<Advert> find() {
         return Arrays.asList(

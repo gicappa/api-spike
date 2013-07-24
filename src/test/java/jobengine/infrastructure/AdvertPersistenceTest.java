@@ -6,11 +6,11 @@ import org.junit.Test;
 
 public class AdvertPersistenceTest {
 
-    AdvertPersistence persistence;
+    AdvertFakePersistence persistence;
 
     @Before
     public void before() {
-        persistence = new AdvertPersistence();
+        persistence = new AdvertFakePersistence();
     }
 
     @Test(expected = ObjectNotFound.class)

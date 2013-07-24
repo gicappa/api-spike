@@ -16,6 +16,7 @@ import java.util.List;
 class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
+
     @Autowired
     private Adverts adverts;
 
@@ -32,7 +33,6 @@ class ApiAdverts {
     @ResponseBody
     public Advert show(@PathVariable Long id) {
         logger.debug("api|GET /adverts/{}", id);
-//        RestPreconditions.checkNotNull( id );
         return adverts.viewAdvert(id);
     }
 
