@@ -1,3 +1,4 @@
+<% String ctx = request.getContextPath(); %>
 <!doctype html>
 <html>
 <head>
@@ -21,10 +22,10 @@
 <body>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-        <a class="brand" href="#"><span class="job">job</span><span class="rapido">rapido</span></a>
+        <a class="brand" href="http://www.jobrapido.com"><span class="job">job</span><span class="rapido">rapido</span></a>
         <ul class="nav">
-            <li class="active"><a href="#">Jobengine API</a></li>
-            <li><a href="<%= request.getContextPath() %>/swagger">API Documentation</a></li>
+            <li class="active"><a href="<%=ctx%>/">Jobengine API</a></li>
+            <li><a href="<%=ctx%>/swagger">API Documentation</a></li>
         </ul>
     </div>
 </div>

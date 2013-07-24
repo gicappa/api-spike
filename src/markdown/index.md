@@ -1,8 +1,36 @@
 
-# Documentation
-[api adverts](api/adverts)
+# Jobengine API
+When developing mobile app, third party application and even just for a sake of separation
+of concerns having an API layer ease the application architecture.
+This _spike_ is meant to try out a real (but limited) implementaion of a RESTful API taking
+into account all the typical burden of such a piece of code:
 
-## Overview
+* Versioning
+* Security
+* Authorization
+* Spring integration
+* Testing
+* Exception handling
+* Performances
+
+## Quick start
+
+```shell
+    $ curl http://localhost:8080/api-spike/api/adverts
+```
+
+## REST Conventions adopted
+<div class="alert alert-info">
+  <strong>TO BE DONE</strong> here it should be presented how resources should be thought
+  and how the POST is meant to create the PUT to update and the GET to obtain a resurce
+  Another point could be the versioning policy
+</div>
+
+
+## Code
+
+The spike code is hosted on http://github.com/gicappa/api-spike
+
 The overall structure of the project is quite straigthforward. There are three layers:
 
 * __application__: where it happens to translate the domain model languge into something
@@ -10,9 +38,6 @@ The overall structure of the project is quite straigthforward. There are three l
 interface method definitions - will happens here.
 * __domain__: will hold the domain logic
 * __infrastructure__: will adapt to the persistence world.
-
-## Spring integration
-Spring is a first
 
 ## Versioning
 <div class="alert">
@@ -29,8 +54,11 @@ Spring is a first
   <strong>to be done</strong>
 </div>
 
+## Spring integration
+Spring is a first
+
 ## Testing
-<div class="alert">
+<div class="alert alert-info">
   <strong>to be done</strong>
 </div>
 
@@ -51,7 +79,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 ## Performances
 to be done
 
-# References
+## References
 http://www.baeldung.com/rest-with-spring-series/
 
 * It should answer to the correct accept (JSON/XML)
