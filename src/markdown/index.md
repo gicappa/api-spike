@@ -1,17 +1,38 @@
-# What you cam find here?
-An automatic API documentation can be found clicking on [Swagger](swagger/)
-
-[api adverts](api/adverts)
 
 # Documentation
+[api adverts](api/adverts)
+
 ## Overview
 The overall structure of the project is quite straigthforward. There are three layers:
+
 * __application__: where it happens to translate the domain model languge into something
-understandable by the outside world and adapt to it. So the restful things - like REST
+ understandable by the outside world and adapt to it. So the restful things - like REST
 interface method definitions - will happens here.
 * __domain__: will hold the domain logic
 * __infrastructure__: will adapt to the persistence world.
 
+## Spring integration
+Spring is a first
+
+## Versioning
+<div class="alert">
+  <strong>to be done</strong>
+</div>
+
+## Security
+<div class="alert">
+  <strong>to be done</strong>
+</div>
+
+## Authorization
+<div class="alert">
+  <strong>to be done</strong>
+</div>
+
+## Testing
+<div class="alert">
+  <strong>to be done</strong>
+</div>
 
 ## Exception handling
 Exceptions are mapped in a  ``ControllerAdvice`` class: here is possible to map wich exception
@@ -27,6 +48,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 }
 ```
 
+## Performances
+to be done
 
 # References
 http://www.baeldung.com/rest-with-spring-series/
