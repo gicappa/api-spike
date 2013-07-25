@@ -1,4 +1,3 @@
-
 # Jobengine API
 When developing mobile app, third party application and even just for a sake of separation
 of concerns having an API layer ease the application architecture.
@@ -6,7 +5,6 @@ This _spike_ is meant to try out a real (but limited) implementaion of a RESTful
 into account all the typical burden of such a piece of code:
 
 * Versioning
-* Security
 * Authorization
 * Spring integration
 * Testing
@@ -19,7 +17,7 @@ into account all the typical burden of such a piece of code:
     $ curl http://localhost:8080/api-spike/api/adverts
 ```
 
-## REST Conventions adopted
+## Accessing the APIs
 <div class="alert alert-info">
   <strong>TO BE DONE</strong> here it should be presented how resources should be thought
   and how the POST is meant to create the PUT to update and the GET to obtain a resurce
@@ -27,8 +25,8 @@ into account all the typical burden of such a piece of code:
 </div>
 
 
+## Developing the APIs
 ## Code
-
 The spike code is hosted on http://github.com/gicappa/api-spike
 
 The overall structure of the project is quite straigthforward. There are three layers:
@@ -44,18 +42,20 @@ interface method definitions - will happens here.
   <strong>to be done</strong>
 </div>
 
-## Security
-<div class="alert">
-  <strong>to be done</strong>
-</div>
+## Authentication/Authorization
+OAuth2 is a protocol that lets external apps request authorization to private details in a user’s
+GitHub account without getting their password. This is preferred over Basic Authentication
+because tokens can be limited to specific types of data, and can be revoked by users at any time.
 
-## Authorization
-<div class="alert">
-  <strong>to be done</strong>
+All developers need to register their application before getting started. A registered OAuth
+application is assigned a unique Client ID and Client Secret. The Client Secret should not
+be shared.
+<div class="alert alert-info">
+  <strong>work in progress</strong>
 </div>
 
 ## Spring integration
-Spring is a first
+Spring is a first class citizen
 
 ## Testing
 <div class="alert alert-info">
