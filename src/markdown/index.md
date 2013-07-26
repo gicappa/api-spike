@@ -1,4 +1,7 @@
 # Jobengine API
+
+- - -
+
 When developing mobile app, third party application and even just for a sake of separation
 of concerns having an API layer ease the application architecture.
 This _spike_ is meant to try out a real (but limited) implementaion of a RESTful API taking
@@ -14,18 +17,17 @@ into account all the typical burden of such a piece of code:
 ## Quick start
 
 ```shell
-    $ curl http://localhost:8080/api-spike/api/adverts
+ $ curl http://localhost:8080/api-spike/api/adverts
 ```
 
-## Accessing the APIs
+# Accessing the APIs
 <div class="alert alert-info">
   <strong>TO BE DONE</strong> here it should be presented how resources should be thought
   and how the POST is meant to create the PUT to update and the GET to obtain a resurce
   Another point could be the versioning policy
 </div>
 
-
-## Developing the APIs
+# Developing the APIs
 ## Code
 The spike code is hosted on http://github.com/gicappa/api-spike
 
@@ -84,3 +86,23 @@ http://www.baeldung.com/rest-with-spring-series/
 
 * It should answer to the correct accept (JSON/XML)
 * It should add an HATEOAS
+
+# Notes
+Controllare se sia possibile specificare nell'header quali tipi (mime type - HTML? / JSON / XML)
+di risposte siamo in grado di fornire e blindare le altre
+
+
+Manca il log del webserver jetty di test che e` stato istanziato per cui non si vede l'errore
+server side ma solo client side.
+
+
+Metafora chiave del valletto: " Many luxury cars come with a valet key. It is a special key you give the parking attendant and unlike your regular key, will only allow the car to be driven a short distance while blocking access to the trunk and the onboard cell phone. Regardless of the restrictions the valet key imposes, the idea is very clever. You give someone limited access to your car with a special key, while using another key to unlock everything else."
+
+A cosa serve OAuth: "OAuth provides a method for users to grant third-party access to their resources without sharing their passwords. It also provides a way to grant limited access (in scope, duration, etc.)."
+
+SSL: API under ssl server?
+
+
+ Eran Hammer
+http://hueniverse.com/2012/07/oauth-2-0-and-the-road-to-hell/
+All the hard fought compromises on the mailing list, in meetings, in special design committees, and in back channels resulted in a specification that fails to deliver its two main goals – security and interoperability. In fact, one of the compromises was to rename it from a protocol to a framework, and another to add a disclaimer that warns that the specification is unlike to produce interoperable implementations.

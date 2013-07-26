@@ -17,6 +17,7 @@ dependencies {
     compile 'org.springframework:spring-webmvc:3.2.3.RELEASE'
     compile 'com.mangofactory:swagger-springmvc:0.5.3'
     compile 'org.springframework.security.oauth:spring-security-oauth2:1.0.5.RELEASE'
+
     runtime 'com.fasterxml.jackson.core:jackson-databind:2.2.2'
     runtime 'javax.xml.bind:jaxb-api:2.2.9'
 
@@ -26,6 +27,7 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.eclipse.jetty:jetty-webapp:8.1.9.v20130131'
     testCompile 'org.springframework:spring-test:3.2.3.RELEASE'
+    testCompile 'com.google.code.gson:gson:2.2.4'
 }
 
 buildscript {
