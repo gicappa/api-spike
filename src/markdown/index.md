@@ -95,14 +95,16 @@ di risposte siamo in grado di fornire e blindare le altre
 Manca il log del webserver jetty di test che e` stato istanziato per cui non si vede l'errore
 server side ma solo client side.
 
-
 Metafora chiave del valletto: " Many luxury cars come with a valet key. It is a special key you give the parking attendant and unlike your regular key, will only allow the car to be driven a short distance while blocking access to the trunk and the onboard cell phone. Regardless of the restrictions the valet key imposes, the idea is very clever. You give someone limited access to your car with a special key, while using another key to unlock everything else."
 
 A cosa serve OAuth: "OAuth provides a method for users to grant third-party access to their resources without sharing their passwords. It also provides a way to grant limited access (in scope, duration, etc.)."
 
-SSL: API under ssl server?
+SSL: API under ssl server? Quali sono gli impatti sui sistemi?
 
 
  Eran Hammer
 http://hueniverse.com/2012/07/oauth-2-0-and-the-road-to-hell/
 All the hard fought compromises on the mailing list, in meetings, in special design committees, and in back channels resulted in a specification that fails to deliver its two main goals – security and interoperability. In fact, one of the compromises was to rename it from a protocol to a framework, and another to add a disclaimer that warns that the specification is unlike to produce interoperable implementations.
+
+
+Gli errori di 404 non devono essere mandati a html se la request non avviene da browser

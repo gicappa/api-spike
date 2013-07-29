@@ -24,6 +24,7 @@ class ApiAdverts {
     @ResponseStatus( HttpStatus.OK )
     @ResponseBody
     public List<Advert> index(String what, String where) {
+
         logger.debug("api|GET /adverts");
         return adverts.search(what, where);
     }
