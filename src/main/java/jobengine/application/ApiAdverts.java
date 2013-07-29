@@ -30,7 +30,7 @@ class ApiAdverts {
     }
 
     @RequestMapping(method = RequestMethod.GET,
-            consumes = "application/vnd.jobrapido.alpha+json",
+            headers = "Accept=application/vnd.jobrapido.alpha+json",
             produces = "application/vnd.jobrapido.alpha+json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody

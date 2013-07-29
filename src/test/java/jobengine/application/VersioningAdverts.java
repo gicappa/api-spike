@@ -30,7 +30,7 @@ public class VersioningAdverts {
         assertThat(response.getHeaders().get("Content-Type"), hasItem("application/vnd.jobrapido.v1+json"));
     }
 
-    @HttpTest(method = Method.GET, path = "/adverts", type = MediaType.APPLICATION_JSON)
+    @HttpTest(method = Method.GET, path = "/adverts", headers = {@Header(name = "Accept", value = "application/json")})
     public void when_json_accept_is_specified_return_json_last_version() {
         assertThat(response.getHeaders().get("Content-Type"), hasItem("application/vnd.jobrapido.v1+json"));
     }
