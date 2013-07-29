@@ -2,6 +2,7 @@ package jobengine.application;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.client.support.HttpRequestWrapper;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -21,7 +22,8 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Server", "Jobrapido");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.setDateHeader("Date", new Date().getTime());
-
+        if (!request.getHeaders("Accept").hasMoreElements()) {
+        }
         return true;
     }
 
