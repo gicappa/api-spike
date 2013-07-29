@@ -6,17 +6,38 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 
-    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <context:property-placeholder location="classpath:web.properties" ignore-unresolvable="true"/>
 
-    <mvc:annotation-driven/>
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/*"/>
             <bean class="jobengine.application.RestHeaderInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <bean id="contentNegotiationManager"
+          class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="false" />
+        <property name="favorParameter" value="false" />
+        <property name="parameterName" value="mediaType" />
+        <property name="ignoreAcceptHeader" value="false"/>
+        <property name="useJaf" value="false"/>
+        <property name="defaultContentType" value="application/vnd.jobrapido.v1+json" />
+
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/vnd.jobrapido.v1+json" />
+                <entry key="json" value="application/vnd.jobrapido.alpha+json" />
+                <entry key="json" value="application/json" />
+                <entry key="xml" value="application/xml" />
+            </map>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
+
 
     <context:component-scan base-package="jobengine.domain"/>
     <context:component-scan base-package="jobengine.application"/>

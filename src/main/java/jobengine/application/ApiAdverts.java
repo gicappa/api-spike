@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/adverts", produces = {"application/json", "application/vnd.jobrapido.v1+json"})
+@RequestMapping(value = "/adverts",
+        consumes = {"*/*", "application/json","application/vnd.jobrapido.v1+json"},
+        produces = {"application/vnd.jobrapido.v1+json"})
 class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
@@ -27,7 +29,9 @@ class ApiAdverts {
         return adverts.search(what, where);
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/vnd.jobrapido.alpha+json")
+    @RequestMapping(method = RequestMethod.GET,
+            consumes = "application/vnd.jobrapido.alpha+json",
+            produces = "application/vnd.jobrapido.alpha+json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public List<Advert> index_alpha(String what, String where) {
