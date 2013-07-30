@@ -8,7 +8,7 @@
 
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-    <context:property-placeholder location="classpath:web.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:log4j.properties" ignore-unresolvable="true"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
@@ -19,19 +19,19 @@
 
     <bean id="contentNegotiationManager"
           class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <property name="favorPathExtension" value="false" />
-        <property name="favorParameter" value="false" />
-        <property name="parameterName" value="mediaType" />
+        <property name="favorPathExtension" value="false"/>
+        <property name="favorParameter" value="false"/>
+        <property name="parameterName" value="format"/>
         <property name="ignoreAcceptHeader" value="false"/>
         <property name="useJaf" value="false"/>
-        <property name="defaultContentType" value="application/vnd.jobrapido.v1+json" />
+        <property name="defaultContentType" value="application/json; charset=utf-8"/>
 
         <property name="mediaTypes">
             <map>
-                <entry key="json" value="application/vnd.jobrapido.v1+json" />
-                <entry key="json" value="application/vnd.jobrapido.alpha+json" />
-                <entry key="json" value="application/json" />
-                <entry key="xml" value="application/xml" />
+                <entry key="json" value="application/vnd.jobrapido.v1+json"/>
+                <entry key="json" value="application/vnd.jobrapido.alpha+json"/>
+                <entry key="json" value="application/json"/>
+                <entry key="xml" value="application/xml"/>
             </map>
         </property>
     </bean>
