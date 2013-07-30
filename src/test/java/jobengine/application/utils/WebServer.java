@@ -24,15 +24,21 @@ public class WebServer extends ExternalResource {
     private WebAppContext createWebAppContext() {
         WebAppContext wac = new WebAppContext();
         wac.setResourceBase("src/main/webapp");
+        wac.setExtraClasspath("src/main/resources,src/test/resources");
         wac.setDescriptor("src/main/webapp/WEB-INF/web.xml");
         wac.setContextPath("/");
         wac.setParentLoaderPriority(true);
         return wac;
     }
 
-    protected void before() throws Throwable {
+    protected void before() {
         out.println("starting webserver...");
-        server.start();
+        try {
+            server.start();
+        } catch (Exception e) {
+            err.println("problem while starting webserver");
+            err.println(e.toString());
+        }
     }
 
     protected void after() {
