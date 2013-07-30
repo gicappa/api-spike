@@ -2,8 +2,6 @@ package jobengine.application;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.client.support.HttpRequestWrapper;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,17 +16,21 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
-        logger.debug("decorating response headers");
+
+        logDebugInformationsOn(request);
+
         response.setHeader("Server", "Jobrapido");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.setDateHeader("Date", new Date().getTime());
-        if (!request.getHeaders("Accept").hasMoreElements()) {
-        }
         return true;
     }
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
+    private void logDebugInformationsOn(HttpServletRequest request) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("decorating response headers");
+            if (!request.getHeaders("Accept").hasMoreElements()) {
+                logger.debug(String.format("accepting %s", request.getHeaders("Accept").toString()));
+            }
+        }
     }
 }
