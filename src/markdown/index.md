@@ -108,3 +108,6 @@ All the hard fought compromises on the mailing list, in meetings, in special des
 
 
 Gli errori di 404 non devono essere mandati a html se la request non avviene da browser
+File upload
+
+Servire risorse statiche
