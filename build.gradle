@@ -5,27 +5,29 @@ apply plugin: 'jetty'
 sourceCompatibility = 1.6
 jettyRun.contextPath = '/'
 
-repositories { mavenCentral() }
+repositories {
+    mavenCentral()
+}
 
 configurations {
-//    all*.exclude module: 'slf4j-log4j12'
-//    all*.exclude group: 'ch.qos.logback', module: 'logback-classic'
+    all*.exclude group: 'ch.qos.logback'
+    all*.exclude group: 'javax.servlet', module: 'servlet-api', version: '2.5'
 }
 
 dependencies {
-    compile 'ch.qos.logback:logback-classic:1.0.13'
-    compile 'org.springframework:spring-webmvc:3.2.3.RELEASE'
-    compile 'com.mangofactory:swagger-springmvc:0.5.3'
-    compile 'org.springframework.security.oauth:spring-security-oauth2:1.0.5.RELEASE'
-    runtime 'com.fasterxml.jackson.core:jackson-databind:2.2.2'
-    runtime 'javax.xml.bind:jaxb-api:2.2.9'
+    compile 'org.springframework:spring-webmvc:3.2.3.RELEASE',
+            'com.mangofactory:swagger-springmvc:0.5.3',
+            'org.springframework.security.oauth:spring-security-oauth2:1.0.5.RELEASE'
+    providedCompile 'com.fasterxml.jackson.core:jackson-databind:2.2.2',
+            'javax.xml.bind:jaxb-api:2.2.9'
 
-    providedCompile 'org.eclipse.jetty:jetty-servlet:8.1.9.v20130131'
+    compile 'javax.servlet:javax.servlet-api:3.0.1'
 
-    testCompile 'com.restfuse:com.eclipsesource.restfuse:1.2.0'
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.eclipse.jetty:jetty-webapp:8.1.9.v20130131'
-    testCompile 'org.springframework:spring-test:3.2.3.RELEASE'
+    testCompile 'junit:junit:4.11',
+            'org.springframework:spring-test:3.2.3.RELEASE',
+            'com.restfuse:com.eclipsesource.restfuse:1.2.0',
+            'com.google.code.gson:gson:2.2.4',
+            'org.eclipse.jetty:jetty-webapp:8.1.3.v20120416'
 }
 
 buildscript {
@@ -38,6 +40,9 @@ buildscript {
     }
 }
 
+
+[compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all']
+
 apply plugin: 'markdown'
 
 war {
@@ -49,5 +54,3 @@ war {
 war.dependsOn markdownToHtml
 
 defaultTasks 'war'
-
-
