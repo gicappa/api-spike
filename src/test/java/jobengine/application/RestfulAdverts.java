@@ -1,16 +1,18 @@
 package jobengine.application;
 
-import com.eclipsesource.restfuse.*;
+import com.eclipsesource.restfuse.Destination;
+import com.eclipsesource.restfuse.HttpJUnitRunner;
+import com.eclipsesource.restfuse.Method;
+import com.eclipsesource.restfuse.Response;
 import com.eclipsesource.restfuse.annotation.Context;
 import com.eclipsesource.restfuse.annotation.HttpTest;
 import jobengine.application.utils.WebServer;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
 import static com.eclipsesource.restfuse.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 @RunWith(HttpJUnitRunner.class)
 public class RestfulAdverts {
@@ -27,6 +29,7 @@ public class RestfulAdverts {
         assertNotFound(response);
     }
 
+    @Ignore("there is a restfuse issue on this [https://github.com/eclipsesource/restfuse/issues/42]")
     @HttpTest(method = Method.PUT, path = "/adverts")
     public void when_http_method_is_not_implemented_it_responds() {
         assertMethodNotAllowed(response);

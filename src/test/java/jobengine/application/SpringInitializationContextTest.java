@@ -10,5 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class SpringInitializationContextTest {
 
     @Test
-    public void whenSpringContextIsInstantiated_thenNoExceptions() { }
+    public void whenSpringContextIsInstantiated_thenNoExceptions() {
+    }
 }
