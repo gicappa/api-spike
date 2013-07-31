@@ -1,6 +1,9 @@
 package jobengine.domain;
 
 public class ObjectNotFound extends RuntimeException {
+
+    private static final long serialVersionUID = 42l; // Life, the universe, and everything
+
     public ObjectNotFound() {
         super();
     }
