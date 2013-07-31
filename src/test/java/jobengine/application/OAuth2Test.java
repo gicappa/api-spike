@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jobengine.application.utils.WebServer;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
@@ -29,6 +30,7 @@ public class OAuth2Test {
     @Context
     private Response response;
 
+    @Ignore("WIP")
     @HttpTest(method = Method.POST, path = "/oauth/token?client_secret=secret&grant_type=password&username=demo&password=1234")
     public void it_return_a_token_when_asked_for_it() {
         AccessToken token = gson().fromJson(response.getBody(), AccessToken.class);
