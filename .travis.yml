@@ -3,12 +3,20 @@ language: java
 install: echo "I don't trust Maven. Gradle FTW!"
 
 jdk:
- - oraclejdk6
+  - oraclejdk6
 
 notifications:
- # See http://about.travis-ci.org/docs/user/build-configuration/ to learn more
- # about configuring notification recipients and more.
- email:
-   recipients:
-     - giancarlo.pace@jobrapido.com
-     - michele.cantelli@jobrapido.com
+  hipchat:
+    rooms:
+      48205_324138@48205_mr._build
+    template:
+      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Changes</a>)'
+    format: html
+  email:
+    - giancarlo.pace@jobrapido.com
+    - michele.cantelli@jobrapido.com
+
+branches:
+  only:
+    - master
+    - /^feature-.*$/
