@@ -20,7 +20,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 
-@RunWith(HttpJUnitRunner.class)
+//@RunWith(HttpJUnitRunner.class)
 public class OAuth2Test {
 
     @ClassRule

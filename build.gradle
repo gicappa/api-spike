@@ -39,6 +39,9 @@ buildscript {
     }
 }
 
+
+[compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all']
+
 apply plugin: 'markdown'
 
 war {

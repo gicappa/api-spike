@@ -2,8 +2,6 @@ language: java
 
 install: echo "I don't trust Maven. Gradle FTW!"
 
-script: gradle test
-
 jdk:
  - oraclejdk6
 
