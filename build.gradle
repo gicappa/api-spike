@@ -19,8 +19,9 @@ dependencies {
             'com.mangofactory:swagger-springmvc:0.5.3',
             'org.springframework.security.oauth:spring-security-oauth2:1.0.5.RELEASE'
     providedCompile 'com.fasterxml.jackson.core:jackson-databind:2.2.2',
-            'javax.xml.bind:jaxb-api:2.2.9',
-            'javax.servlet:javax.servlet-api:3.0.1'
+            'javax.xml.bind:jaxb-api:2.2.9'
+
+    compile 'javax.servlet:javax.servlet-api:3.0.1'
 
     testCompile 'junit:junit:4.11',
             'org.springframework:spring-test:3.2.3.RELEASE',

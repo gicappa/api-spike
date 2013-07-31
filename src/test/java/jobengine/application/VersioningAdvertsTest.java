@@ -15,14 +15,20 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("classpath:applicationContext.xml")
+@Ignore("specifing a new behaviour much more similar to github - WIP")
 public class VersioningAdvertsTest {
+
+    public static final MediaType MEDIA_TYPE_ALPHA = MediaType.parseMediaType("application/vnd.jobrapido.alpha+json");
+    public static final MediaType MEDIA_TYPE_V1 = MediaType.parseMediaType("application/vnd.jobrapido.v1+json");
 
     @Autowired
     private WebApplicationContext wac;
+
     private MockMvc rest;
 
     @Before
@@ -34,29 +40,39 @@ public class VersioningAdvertsTest {
     public void when_no_media_type_is_specified_return_json() throws Exception {
         rest.perform(get("/adverts")).andExpect(content().contentType("application/json;charset=utf-8"));
     }
+
     @Test
     public void when_no_media_type_is_specified_return_version_v1() throws Exception {
-        rest.perform(get("/adverts")).andExpect(content().contentType("application/json;charset=utf-8"));
-        //assertThat(response.getHeaders().get("X-Jobrapido-Media-Type"), hasItem("v1; format=json"));
+        rest.perform(get("/adverts")).andExpect(header().string("X-Jobrapido-Media-Type", "v1"));
     }
 
     @Test
-    public void when_json_accept_is_specified_return_json_last_version() throws Exception {
+    public void when_media_type_is_json_accept_is_specified_return_json() throws Exception {
         rest.perform(get("/adverts").accept(MediaType.APPLICATION_JSON)).andExpect(content().contentType("application/json;charset=utf-8"));
-        //application/vnd.jobrapido.v1+json
     }
 
     @Test
-    @Ignore
-    public void when_alpha_json_accept_is_specified_return_json_alpha_version() throws Exception {
-        rest.perform(get("/adverts").accept(MediaType.parseMediaType("application/vnd.jobrapido.alpha+json"))).andExpect(content().contentType("application/json;charset=utf-8"));
-        //application/vnd.jobrapido.v1+json
+    public void when_json_accept_is_specified_return_version_v1() throws Exception {
+        rest.perform(get("/adverts").accept(MediaType.APPLICATION_JSON)).andExpect(header().string("X-Jobrapido-Media-Type", "v1"));
     }
 
     @Test
-    @Ignore
-    public void when_v1_json_accept_is_specified_return_json_v1_version() throws Exception {
-        rest.perform(get("/adverts").accept(MediaType.parseMediaType("application/vnd.jobrapido.v1+json"))).andExpect(content().contentType("application/json;charset=utf-8"));
-        //application/vnd.jobrapido.v1+json
+    public void when_media_type_is_alpha_json_accept_is_specified_return_json() throws Exception {
+        rest.perform(get("/adverts").accept(MEDIA_TYPE_ALPHA)).andExpect(content().contentType("application/json;charset=utf-8"));
+    }
+
+    @Test
+    public void when_media_type_is_alpha_json_accept_is_specified_return_alpha_version() throws Exception {
+        rest.perform(get("/adverts").accept(MEDIA_TYPE_ALPHA)).andExpect(header().string("X-Jobrapido-Media-Type", "alpha"));
+    }
+
+    @Test
+    public void when_media_type_is_v1_json_accept_is_specified_return_json() throws Exception {
+        rest.perform(get("/adverts").accept(MEDIA_TYPE_V1)).andExpect(content().contentType("application/json;charset=utf-8"));
+    }
+
+    @Test
+    public void when_media_type_is_v1_json_accept_is_specified_return_v1_version() throws Exception {
+        rest.perform(get("/adverts").accept(MEDIA_TYPE_V1)).andExpect(header().string("X-Jobrapido-Media-Type", "v1"));
     }
 }
