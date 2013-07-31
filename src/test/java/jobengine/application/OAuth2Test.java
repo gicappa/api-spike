@@ -20,17 +20,17 @@ import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 
-//@RunWith(HttpJUnitRunner.class)
+@RunWith(HttpJUnitRunner.class)
 public class OAuth2Test {
 
     @ClassRule
     public static WebServer g = new WebServer();
     @Rule
-    public Destination d = new Destination(this, "http://localhost:8080/rest/");
+    public Destination d = new Destination(this, "http://localhost:53280/rest/");
     @Context
     private Response response;
 
-    @Ignore("WIP")
+    @Ignore
     @HttpTest(method = Method.POST, path = "/oauth/token?client_secret=secret&grant_type=password&username=demo&password=1234")
     public void it_return_a_token_when_asked_for_it() {
         AccessToken token = gson().fromJson(response.getBody(), AccessToken.class);
@@ -42,6 +42,7 @@ public class OAuth2Test {
         return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
     }
 
+    @SuppressWarnings("unused")
     class AccessToken {
         public String accessToken;
         public String tokenType;

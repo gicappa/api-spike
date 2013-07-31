@@ -12,7 +12,7 @@ public class WebServer extends ExternalResource {
 
     public WebServer() {
         try {
-            server = new Server(8080);
+            server = new Server(53280);
             server.setHandler(createWebAppContext());
             server.start();
         } catch (Exception e) {
@@ -32,21 +32,22 @@ public class WebServer extends ExternalResource {
     }
 
     protected void before() {
-        out.println("starting webserver...");
+        out.print("starting webserver...");
         try {
             server.start();
+            out.println("                    [OK]");
         } catch (Exception e) {
-            err.println("problem while starting webserver");
-            err.println(e.toString());
+            out.println("                    [FAIL]");
         }
     }
 
     protected void after() {
+        out.print("stopping webserver...");
         try {
             server.stop();
-            out.println("...stopped webserver");
+            out.println("                    [OK]");
         } catch (Exception e) {
-            err.println("problem while stopping webserver");
+            out.println("                    [FAIL]");
         }
     }
 }
