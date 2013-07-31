@@ -13,8 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/adverts",
-        consumes = {"*/*", "application/json","application/vnd.jobrapido.v1+json"},
-        produces = {"application/json; charset=utf-8"})
+        consumes = {"*/*", "application/json","application/vnd.jobrapido.v1+json"})
 class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
