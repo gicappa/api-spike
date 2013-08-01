@@ -1,7 +1,5 @@
 package jobengine.application;
 
-import com.google.common.base.Function;
-import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -11,6 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,16 +34,27 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
     }
 
     private String extractVersionFrom(HttpServletRequest request) {
-        return extractVersionFrom(regexMatcherOf(acceptHeaderIn(request)));
-    }
-
-    private Matcher regexMatcherOf(String accept) {
-        String subtype = MediaType.parseMediaType(accept).getSubtype();
-        return Pattern.compile("vnd\\.jobrapido\\.(.*)\\+(.*)").matcher(subtype);
+        String accept = acceptHeaderIn(request);
+        String version = "v1";
+        for (MediaType media : mediaSubtypeListOf(accept)) {
+            Matcher regexp = regexMatcherOf(media.getSubtype());
+            if (regexp.matches()) {
+                version = regexp.group(1);
+            }
+        }
+        return version;
     }
 
     private String extractVersionFrom(Matcher m) {
         return m.matches() ? m.group(1) : "v1";
+    }
+
+    private Matcher regexMatcherOf(String mediaSubtype) {
+        return Pattern.compile("vnd\\.jobrapido\\.(.*)\\+(.*)").matcher(mediaSubtype);
+    }
+
+    private List<MediaType> mediaSubtypeListOf(String accept) {
+        return MediaType.parseMediaTypes(accept);
     }
 
     private String acceptHeaderIn(HttpServletRequest request) {
