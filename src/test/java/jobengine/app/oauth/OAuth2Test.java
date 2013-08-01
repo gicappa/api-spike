@@ -1,4 +1,4 @@
-package jobengine.application;
+package jobengine.app.oauth;
 
 import com.eclipsesource.restfuse.Destination;
 import com.eclipsesource.restfuse.HttpJUnitRunner;
@@ -9,7 +9,7 @@ import com.eclipsesource.restfuse.annotation.HttpTest;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import jobengine.application.utils.WebServer;
+import jobengine.app.utils.WebServer;
 import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Rule;
