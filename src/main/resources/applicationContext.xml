@@ -31,13 +31,47 @@
                 <entry key="json" value="application/vnd.jobrapido.v1+json"/>
                 <entry key="json" value="application/vnd.jobrapido.alpha+json"/>
                 <entry key="json" value="application/json"/>
+                <entry key="xml" value="application/vnd.jobrapido.v1+xml"/>
+                <entry key="xml" value="application/vnd.jobrapido.alpha+xml"/>
                 <entry key="xml" value="application/xml"/>
             </map>
         </property>
     </bean>
 
-    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:message-converters register-defaults="true">
+            <bean class="jobengine.app.request.JobrapidoVndConverter" />
+        </mvc:message-converters>
 
+    </mvc:annotation-driven>
+
+    <!--<bean name="handlerAdapter"-->
+          <!--class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="webBindingInitializer">-->
+            <!--<bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">-->
+                <!--<property name="conversionService" ref="conversionService"/>-->
+            <!--</bean>-->
+        <!--</property>-->
+        <!--<property name="contentNegotiationManager" ref="contentNegotiationManager"/>-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>-->
+                <!--<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>-->
+                <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
+                <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>-->
+                <!--<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>-->
+                <!--<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>-->
+                <!--<bean class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="conversionService" class="org.springframework.format.support.DefaultFormattingConversionService"/>-->
+
+    <!--<bean name="handlerMapping"-->
+          <!--class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">-->
+        <!--<property name="useTrailingSlashMatch" value="true"/>-->
+    <!--</bean>-->
 
     <context:component-scan base-package="jobengine.domain"/>
     <context:component-scan base-package="jobengine.app"/>

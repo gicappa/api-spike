@@ -13,9 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -35,7 +33,7 @@ public class VersioningTest {
 
     @Test
     public void when_no_media_type_is_specified_return_json() throws Exception {
-        rest.perform(get("/adverts")).andExpect(content().contentType("application/json;charset=utf-8"));
+        rest.perform(get("/adverts")).andExpect(content().contentType("application/json;charset=UTF-8"));
     }
 
     @Test
@@ -45,7 +43,7 @@ public class VersioningTest {
 
     @Test
     public void when_media_type_is_json_accept_is_specified_return_json() throws Exception {
-        rest.perform(get("/adverts").accept(MediaType.APPLICATION_JSON)).andExpect(content().contentType("application/json;charset=utf-8"));
+        rest.perform(get("/adverts").accept(MediaType.APPLICATION_JSON)).andExpect(content().contentType("application/json;charset=UTF-8"));
     }
 
     @Test
@@ -78,8 +76,24 @@ public class VersioningTest {
         rest.perform(get("/adverts").accept(MediaType.TEXT_PLAIN, MEDIA_TYPE_ALPHA)).andExpect(header().string("X-Jobrapido-Media-Type", "alpha"));
     }
     @Test
-    public void when_media_types_select_two_version_it_respond_406() throws Exception {
+    public void when_media_types_select_two_version_it_responds_406() throws Exception {
         rest.perform(get("/adverts").accept(MEDIA_TYPE_V1, MEDIA_TYPE_ALPHA)).andExpect(status().isNotAcceptable());
+    }
+
+    @Test
+    public void xml_is_a_supported_media_type() throws Exception {
+        rest.perform(get("/adverts").accept(MediaType.APPLICATION_XML)).andExpect(status().isOk());
+    }
+
+    @Test
+    public void when_media_types_is_not_supported_responds_406() throws Exception {
+        rest.perform(get("/adverts").accept(MediaType.IMAGE_GIF)).andExpect(status().isNotAcceptable());
+        rest.perform(get("/adverts").accept(MediaType.TEXT_HTML)).andExpect(status().isNotAcceptable());
+        rest.perform(get("/adverts").accept(MediaType.TEXT_PLAIN)).andExpect(status().isNotAcceptable());
+        rest.perform(get("/adverts").accept(MediaType.IMAGE_JPEG)).andExpect(status().isNotAcceptable());
+        rest.perform(get("/adverts").accept(MediaType.IMAGE_PNG)).andExpect(status().isNotAcceptable());
+        rest.perform(get("/adverts").accept(MediaType.APPLICATION_OCTET_STREAM)).andExpect(status().isNotAcceptable());
+        rest.perform(get("/adverts").accept(MediaType.MULTIPART_FORM_DATA)).andExpect(status().isNotAcceptable());
     }
 
 }

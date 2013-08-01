@@ -1,5 +1,8 @@
 package jobengine.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Advert {
 
     private final Long id;

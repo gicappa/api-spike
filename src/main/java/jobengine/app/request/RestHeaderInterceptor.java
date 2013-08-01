@@ -23,10 +23,14 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Server", "Jobrapido");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.setDateHeader("Date", new Date().getTime());
-        response.setContentType("application/json;charset=utf-8");
         response.addHeader("X-Jobrapido-Media-Type", extractVersionFrom(request));
 
         return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+//        response.setContentType("application/json;charset=utf-8");
     }
 
     private String extractVersionFrom(HttpServletRequest request) {
@@ -36,11 +40,6 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
 
     private String acceptHeaderIn(HttpServletRequest request) {
         return request.getHeader("Accept") == null ? "~/~" : request.getHeader("Accept");
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        response.setContentType("application/json;charset=utf-8");
     }
 
     private void logDebugInformationsOn(HttpServletRequest request) {

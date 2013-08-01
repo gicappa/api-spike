@@ -13,11 +13,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/adverts",
-        consumes = {"*/*", "application/json","application/vnd.jobrapido.v1+json"})
+        consumes = {"*/*", "application/json", "application/xml",
+                "application/vnd.jobrapido.v1+json", "application/vnd.jobrapido.v1+xml"})
 class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
-
     @Autowired
     private Adverts adverts;
 
@@ -30,8 +30,7 @@ class ApiAdverts {
     }
 
     @RequestMapping(method = RequestMethod.GET,
-            headers = "Accept=application/vnd.jobrapido.alpha+json")
-
+            headers = "Accept=application/vnd.jobrapido.alpha+json, application/vnd.jobrapido.alpha+xml")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public List<Advert> index_alpha(String what, String where) {
