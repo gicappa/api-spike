@@ -3,12 +3,12 @@ package jobengine.application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -36,24 +36,23 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
 
     private String extractVersionFrom(HttpServletRequest request) {
         String accept = acceptHeaderIn(request);
-        String version = "v1";
-        boolean matched = false;
+        List<String> versions = new ArrayList<String>();
+
         for (MediaType media : mediaSubtypeListOf(accept)) {
             Matcher regexp = regexMatcherOf(media.getSubtype());
 
-            if (regexp.matches() && matched) {
-                throw new NotAcceptableRequest();
-            }
             if (regexp.matches()) {
-                version = regexp.group(1);
-                matched = true;
+                versions.add(regexp.group(1));
             }
         }
-        return version;
-    }
+        if (versions.size() > 1) {
+            throw new NotAcceptableRequest();
+        }
+        if (versions.isEmpty()) {
+            versions.add("v1");
+        }
 
-    private String extractVersionFrom(Matcher m) {
-        return m.matches() ? m.group(1) : "v1";
+        return versions.get(0);
     }
 
     private Matcher regexMatcherOf(String mediaSubtype) {
