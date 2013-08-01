@@ -1,4 +1,4 @@
-package jobengine.app;
+package jobengine.app.oauth;
 
 import com.eclipsesource.restfuse.Destination;
 import com.eclipsesource.restfuse.HttpJUnitRunner;

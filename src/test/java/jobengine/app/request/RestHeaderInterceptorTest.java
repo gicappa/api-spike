@@ -1,4 +1,4 @@
-package jobengine.app;
+package jobengine.app.request;
 
 
 import org.junit.Test;

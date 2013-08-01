@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("classpath:applicationContext.xml")
-public class VersioningAdvertsTest {
+public class VersioningTest {
 
     public static final MediaType MEDIA_TYPE_ALPHA = MediaType.parseMediaType("application/vnd.jobrapido.alpha+json");
     public static final MediaType MEDIA_TYPE_V1 = MediaType.parseMediaType("application/vnd.jobrapido.v1+json");
