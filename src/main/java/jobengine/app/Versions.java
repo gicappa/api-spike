@@ -1,4 +1,4 @@
-package jobengine.application;
+package jobengine.app;
 
 import com.google.common.collect.Lists;
 import org.springframework.http.MediaType;

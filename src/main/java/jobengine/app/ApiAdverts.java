@@ -1,4 +1,4 @@
-package jobengine.application;
+package jobengine.app;
 
 import jobengine.domain.Advert;
 import jobengine.domain.Adverts;

@@ -1,8 +1,7 @@
-package jobengine.application;
+package jobengine.app;
 
 
 import org.junit.Test;
-import org.springframework.http.MediaType;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
