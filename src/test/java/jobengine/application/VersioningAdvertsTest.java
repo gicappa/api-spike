@@ -79,7 +79,6 @@ public class VersioningAdvertsTest {
         rest.perform(get("/adverts").accept(MediaType.TEXT_PLAIN, MEDIA_TYPE_ALPHA)).andExpect(header().string("X-Jobrapido-Media-Type", "alpha"));
     }
     @Test
-    @Ignore
     public void when_media_types_select_two_version_it_respond_406() throws Exception {
         rest.perform(get("/adverts").accept(MEDIA_TYPE_V1, MEDIA_TYPE_ALPHA)).andExpect(status().isNotAcceptable());
     }
