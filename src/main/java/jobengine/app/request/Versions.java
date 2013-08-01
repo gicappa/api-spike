@@ -1,6 +1,7 @@
-package jobengine.app;
+package jobengine.app.request;
 
 import com.google.common.collect.Lists;
+import jobengine.app.ex.NotAcceptableRequest;
 import org.springframework.http.MediaType;
 
 import java.util.List;

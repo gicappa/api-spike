@@ -13,7 +13,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/*"/>
-            <bean class="jobengine.app.RestHeaderInterceptor"/>
+            <bean class="jobengine.app.request.RestHeaderInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

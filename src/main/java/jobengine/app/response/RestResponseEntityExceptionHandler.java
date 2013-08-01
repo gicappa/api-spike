@@ -1,4 +1,4 @@
-package jobengine.app;
+package jobengine.app.response;
 
 import jobengine.domain.ObjectNotFound;
 import org.springframework.http.HttpHeaders;
