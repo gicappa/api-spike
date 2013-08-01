@@ -1,5 +1,6 @@
 package jobengine.application;
 
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -8,7 +9,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
 
+    public static final String DEFAULT_VERSION = "v1";
     private Logger logger = LoggerFactory.getLogger(RestHeaderInterceptor.class);
 
     @Override
@@ -35,24 +36,33 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
     }
 
     private String extractVersionFrom(HttpServletRequest request) {
-        String accept = acceptHeaderIn(request);
-        List<String> versions = new ArrayList<String>();
+        List<String> versions = mapMediaTypesToVersions(acceptHeaderIn(request));
 
-        for (MediaType media : mediaSubtypeListOf(accept)) {
+        if (moreThanOneSpecified(versions)) throw new NotAcceptableRequest();
+
+        if (noSpecified(versions)) return DEFAULT_VERSION;
+
+        return versions.get(0);
+    }
+
+    private boolean noSpecified(List<String> versions) {
+        return versions.isEmpty();
+    }
+
+    private boolean moreThanOneSpecified(List<String> versions) {
+        return versions.size() > 1;
+    }
+
+    private List<String> mapMediaTypesToVersions(String accept) {
+        List<String > versions = Lists.newArrayList();
+
+        for(MediaType media : mediaSubtypeListOf(accept)) {
             Matcher regexp = regexMatcherOf(media.getSubtype());
-
             if (regexp.matches()) {
                 versions.add(regexp.group(1));
             }
         }
-        if (versions.size() > 1) {
-            throw new NotAcceptableRequest();
-        }
-        if (versions.isEmpty()) {
-            versions.add("v1");
-        }
-
-        return versions.get(0);
+        return versions;
     }
 
     private Matcher regexMatcherOf(String mediaSubtype) {
