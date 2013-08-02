@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class RestHeaderInterceptorTest {
 
     @Test
-    public void random_media_type_patterns_don_t_match() {
+    public void random_mdia_type_patterns_don_t_match() {
         assertFalse(versionMatcherOf("cippalippa").matches());
     }
 
