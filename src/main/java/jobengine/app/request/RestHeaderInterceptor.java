@@ -25,15 +25,11 @@ public class RestHeaderInterceptor extends HandlerInterceptorAdapter {
         response.setDateHeader("Date", new Date().getTime());
         response.addHeader("X-Jobrapido-Media-Type", extractVersionFrom(request));
         request.setAttribute("X-Jobrapido-Media-Type", extractVersionFrom(request));
-
         return true;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-//        System.out.println("..............................<<<<<<<<<<");
-//        response.setContentType("application/json;charset=utf-8");
-    }
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {}
 
     private String extractVersionFrom(HttpServletRequest request) {
         Versions versions = new Versions(acceptHeaderIn(request));

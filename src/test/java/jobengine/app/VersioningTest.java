@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration(locations = {"classpath:applicationContext.xml", "file:src/main/webapp/WEB-INF/api-servlet.xml"})
 public class VersioningTest {
 
     public static final MediaType MEDIA_TYPE_ALPHA = MediaType.parseMediaType("application/vnd.jobrapido.alpha+json");
@@ -29,7 +30,14 @@ public class VersioningTest {
 
     @Before
     public void setup() {
+
         rest = MockMvcBuilders.webAppContextSetup(this.wac).build();
+
+    }
+
+    @Test
+    public void resource_adverts_must_exist() throws Exception {
+        rest.perform(get("/adverts").header("host","localhost:8080")).andExpect(status().isOk());
     }
 
     @Test
