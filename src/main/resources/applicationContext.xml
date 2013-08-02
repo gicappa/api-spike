@@ -2,79 +2,80 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-
-    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:property-placeholder location="classpath:log4j.properties" ignore-unresolvable="true"/>
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/*"/>
-            <bean class="jobengine.app.request.RestHeaderInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <context:component-scan base-package="jobengine.domain"/>
+    <context:component-scan base-package="jobengine.app"/>
+    <context:component-scan base-package="jobengine.infrastructure"/>
 
-    <bean id="contentNegotiationManager"
-          class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <property name="favorPathExtension" value="false"/>
-        <property name="favorParameter" value="false"/>
-        <property name="parameterName" value="format"/>
-        <property name="ignoreAcceptHeader" value="false"/>
-        <property name="useJaf" value="false"/>
-        <property name="defaultContentType" value="application/json; charset=utf-8"/>
 
-        <property name="mediaTypes">
-            <map>
-                <entry key="json" value="application/vnd.jobrapido.v1+json"/>
-                <entry key="json" value="application/vnd.jobrapido.alpha+json"/>
-                <entry key="json" value="application/json"/>
-                <entry key="xml" value="application/vnd.jobrapido.v1+xml"/>
-                <entry key="xml" value="application/vnd.jobrapido.alpha+xml"/>
-                <entry key="xml" value="application/xml"/>
-            </map>
-        </property>
-    </bean>
-
-    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
-        <mvc:message-converters register-defaults="true">
-            <bean class="jobengine.app.request.JobrapidoVndConverter" />
-        </mvc:message-converters>
-
-    </mvc:annotation-driven>
-
-    <!--<bean name="handlerAdapter"-->
-          <!--class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+    <bean name="handlerAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <!--<property name="webBindingInitializer">-->
             <!--<bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">-->
                 <!--<property name="conversionService" ref="conversionService"/>-->
             <!--</bean>-->
         <!--</property>-->
         <!--<property name="contentNegotiationManager" ref="contentNegotiationManager"/>-->
-        <!--<property name="messageConverters">-->
-            <!--<list>-->
+        <property name="messageConverters">
+            <list>
                 <!--<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>-->
                 <!--<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>-->
-                <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
                 <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>-->
                 <!--<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>-->
                 <!--<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>-->
                 <!--<bean class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"/>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
+            </list>
+        </property>
+    </bean>
 
     <!--<bean id="conversionService" class="org.springframework.format.support.DefaultFormattingConversionService"/>-->
 
-    <!--<bean name="handlerMapping"-->
-          <!--class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">-->
-        <!--<property name="useTrailingSlashMatch" value="true"/>-->
+    <bean name="handlerMapping"
+          class="jobengine.app.request.JRRequestMappingHandlerMapping">
+        <property name="useTrailingSlashMatch" value="true"/>
+    </bean>
+    <!--<mvc:annotation-driven>-->
+        <!--<mvc:message-converters register-defaults="true">-->
+            <!--<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />-->
+            <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />-->
+            <!--<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"/>-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
+
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/*"/>-->
+            <!--<bean class="jobengine.app.request.RestHeaderInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!--<bean id="contentNegotiationManager"-->
+          <!--class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">-->
+        <!--<property name="favorPathExtension" value="false"/>-->
+        <!--<property name="favorParameter" value="false"/>-->
+        <!--<property name="parameterName" value="format"/>-->
+        <!--<property name="ignoreAcceptHeader" value="false"/>-->
+        <!--<property name="useJaf" value="false"/>-->
+        <!--<property name="defaultContentType" value="application/json"/>-->
+
+        <!--<property name="mediaTypes">-->
+            <!--<map>-->
+                <!--<entry key="json" value="application/vnd.jobrapido.v1+json"/>-->
+                <!--<entry key="json" value="application/vnd.jobrapido.alpha+json"/>-->
+                <!--<entry key="json" value="application/json"/>-->
+                <!--<entry key="xml" value="application/vnd.jobrapido.v1+xml"/>-->
+                <!--<entry key="xml" value="application/vnd.jobrapido.alpha+xml"/>-->
+                <!--<entry key="xml" value="application/xml"/>-->
+            <!--</map>-->
+        <!--</property>-->
     <!--</bean>-->
-
-    <context:component-scan base-package="jobengine.domain"/>
-    <context:component-scan base-package="jobengine.app"/>
-    <context:component-scan base-package="jobengine.infrastructure"/>
-
 </beans>

@@ -1,5 +1,6 @@
 package jobengine.app;
 
+import jobengine.app.request.ApiVersion;
 import jobengine.domain.Advert;
 import jobengine.domain.Adverts;
 import org.slf4j.Logger;
@@ -13,8 +14,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/adverts",
-        consumes = {"*/*", "application/json", "application/xml",
-                "application/vnd.jobrapido.v1+json", "application/vnd.jobrapido.v1+xml"})
+        consumes = {
+                "*/*",
+                "application/json",
+                /*"application/xml",*/
+                "application/vnd.jobrapido.v1+json"})
+//                "application/vnd.jobrapido.v1+xml"})
+//        produces = {"application/json", "application/xml",
+//                "application/*+json", "application/*+xml"})
 class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
@@ -30,9 +37,10 @@ class ApiAdverts {
     }
 
     @RequestMapping(method = RequestMethod.GET,
-            headers = "Accept=application/vnd.jobrapido.alpha+json, application/vnd.jobrapido.alpha+xml")
+            consumes = {"application/vnd.jobrapido.alpha+json"})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @ApiVersion("alpha")
     public List<Advert> index_alpha(String what, String where) {
         logger.debug("api|alpha|GET /adverts");
         return adverts.search(what, where);

@@ -22,6 +22,7 @@ public class VersioningTest {
 
     public static final MediaType MEDIA_TYPE_ALPHA = MediaType.parseMediaType("application/vnd.jobrapido.alpha+json");
     public static final MediaType MEDIA_TYPE_V1 = MediaType.parseMediaType("application/vnd.jobrapido.v1+json");
+
     @Autowired
     private WebApplicationContext wac;
     private MockMvc rest;
@@ -33,7 +34,7 @@ public class VersioningTest {
 
     @Test
     public void when_no_media_type_is_specified_return_json() throws Exception {
-        rest.perform(get("/adverts")).andExpect(content().contentType("application/json;charset=UTF-8"));
+        rest.perform(get("/adverts")).andExpect(content().contentType("application/json"));
     }
 
     @Test
@@ -43,7 +44,7 @@ public class VersioningTest {
 
     @Test
     public void when_media_type_is_json_accept_is_specified_return_json() throws Exception {
-        rest.perform(get("/adverts").accept(MediaType.APPLICATION_JSON)).andExpect(content().contentType("application/json;charset=UTF-8"));
+        rest.perform(get("/adverts").accept(MediaType.APPLICATION_JSON)).andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
@@ -53,7 +54,7 @@ public class VersioningTest {
 
     @Test
     public void when_media_type_is_alpha_json_accept_is_specified_return_json() throws Exception {
-        rest.perform(get("/adverts").accept(MEDIA_TYPE_ALPHA)).andExpect(content().contentType("application/json;charset=utf-8"));
+        rest.perform(get("/adverts").accept(MEDIA_TYPE_ALPHA)).andExpect(content().contentType(MEDIA_TYPE_ALPHA));
     }
 
     @Test
@@ -63,7 +64,7 @@ public class VersioningTest {
 
     @Test
     public void when_media_type_is_v1_json_accept_is_specified_return_json() throws Exception {
-        rest.perform(get("/adverts").accept(MEDIA_TYPE_V1)).andExpect(content().contentType("application/json;charset=utf-8"));
+        rest.perform(get("/adverts").accept(MEDIA_TYPE_V1)).andExpect(content().contentType(MEDIA_TYPE_V1));
     }
 
     @Test
