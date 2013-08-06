@@ -12,12 +12,16 @@ public class NotAcceptableRequest extends RuntimeException {
     public NotAcceptableRequest() {
         super();
     }
+
     public NotAcceptableRequest(String message, Throwable cause) {
         super(message, cause);
     }
+
     public NotAcceptableRequest(String message) {
         super(message);
     }
+
     public NotAcceptableRequest(Throwable cause) {
         super(cause);
-    }}
+    }
+}

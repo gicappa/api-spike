@@ -37,7 +37,7 @@ public class Versions {
     }
 
     private void addToVersionsIfIsMatchedOn(String mediaSubtype) {
-         Matcher versionMatcher = versionMatcherOf(mediaSubtype);
+        Matcher versionMatcher = versionMatcherOf(mediaSubtype);
 
         if (versionMatcher.matches())
             versions.add(versionMatcher.group(1));

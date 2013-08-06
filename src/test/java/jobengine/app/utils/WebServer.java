@@ -4,7 +4,8 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.rules.ExternalResource;
 
-import static java.lang.System.*;
+import static java.lang.System.exit;
+import static java.lang.System.out;
 
 public class WebServer extends ExternalResource {
 
