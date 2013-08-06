@@ -19,15 +19,13 @@ dependencies {
             'com.mangofactory:swagger-springmvc:0.5.3',
             'com.sun.jersey:jersey-bundle:1.17.1',
             'org.springframework.security.oauth:spring-security-oauth2:1.0.5.RELEASE',
-            'com.sun.jersey:jersey-json:1.17.1'
+            'com.sun.jersey:jersey-json:1.17.1',
+            'com.fasterxml.jackson.core:jackson-databind:2.2.2',
+            'javax.xml.bind:jaxb-api:2.2.9'
 
     compile('com.sun.jersey.contribs:jersey-spring:1.17.1') {
         exclude group: 'org.springframework'
     }
-
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.2.2',
-            'javax.xml.bind:jaxb-api:2.2.9'
-
     compile 'javax.servlet:javax.servlet-api:3.0.1'
 
     testCompile 'junit:junit:4.11',
@@ -36,8 +34,8 @@ dependencies {
             'com.google.code.gson:gson:2.2.4',
             'org.eclipse.jetty:jetty-webapp:8.1.3.v20120416',
             'com.sun.jersey.jersey-test-framework:jersey-test-framework-core:1.17.1',
-            'com.sun.jersey.jersey-test-framework:jersey-test-framework-grizzly2:1.17.1',
-            'com.sun.jersey:jersey-grizzly2-servlet:1.17.1'
+            'com.sun.jersey.jersey-test-framework:jersey-test-framework-grizzly:1.17.1'
+//            'com.sun.jersey.jersey-test-framework:jersey-test-framework-inmemory:1.17.1'
 }
 
 buildscript {

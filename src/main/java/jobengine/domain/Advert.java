@@ -1,6 +1,10 @@
 package jobengine.domain;
 
-public class Advert {
+import java.io.Serializable;
+
+public class Advert implements Serializable {
+
+    private static final long serialVersionUID = 42l; // Life, the universe, and everything
 
     private final Long id;
     private final String url;

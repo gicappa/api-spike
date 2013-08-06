@@ -1,6 +1,11 @@
 package jobengine.app;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.spi.spring.container.servlet.SpringServlet;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
@@ -8,8 +13,8 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 import jobengine.domain.Advert;
 import org.junit.Test;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.request.RequestContextListener;
 
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -20,23 +25,29 @@ public class VersioningTest extends JerseyTest {
 
     @Override
     protected AppDescriptor configure() {
-        return new WebAppDescriptor.Builder("jobengine.app")
+        WebAppDescriptor build = new WebAppDescriptor.Builder("jobengine.app")
                 .servletClass(SpringServlet.class)
                 .initParam("com.sun.jersey.api.json.POJOMappingFeature", "true")
                 .contextListenerClass(ContextLoaderListener.class)
+                .requestListenerClass(RequestContextListener.class)
                 .contextPath("/")
-                .servletPath("/api")
+                .servletPath("/")
                 .contextParam("contextConfigLocation", "classpath:applicationContext.xml")
                 .build();
+        build.getClientConfig().getProperties().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+        System.out.println(build.getClientConfig().getFeatures());
+        return build;
     }
 
     @Test
     public void when_no_media_type_is_specified_return_json() throws Exception {
-        WebResource webResource = resource();
-//        System.in.read();
 
-        List<Advert> response = webResource.path("/adverts")
-                .accept(MediaType.APPLICATION_JSON_TYPE).get(List.class);
+        ClientConfig clientConfig = new DefaultClientConfig();
+        clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+        Client client = Client.create(clientConfig);
+        WebResource webResource = client.resource(getBaseURI()).path("/adverts/");
+        GenericType< List <Advert>> list = new GenericType<List<Advert>>() {};
+        List<Advert> response = webResource.accept("application/json").get(list);
         System.out.println(response);
         assertThat(response, is(notNullValue()));
 

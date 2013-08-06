@@ -1,5 +1,6 @@
 package jobengine.app;
 
+import com.google.common.collect.Lists;
 import jobengine.domain.Advert;
 import jobengine.domain.Adverts;
 import org.slf4j.Logger;
@@ -8,17 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Component
 @Scope("prototype")
 @Path("/adverts")
-@Produces(MediaType.APPLICATION_JSON)
 public class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
@@ -26,9 +23,12 @@ public class ApiAdverts {
     private Adverts adverts;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public List<Advert> index_v1() {
         logger.debug("api|v1|GET /adverts");
-        return adverts.search("", "");
+//        return adverts.search("", "");
+        return Lists.newArrayList();
     }
 
 //    @GET
