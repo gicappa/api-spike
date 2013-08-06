@@ -1,19 +1,18 @@
 package jobengine.app;
 
-import com.google.common.collect.Lists;
 import jobengine.domain.Advert;
 import jobengine.domain.Adverts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Component
+@Controller
 @Scope("prototype")
 @Path("/adverts")
 public class ApiAdverts {
@@ -27,8 +26,7 @@ public class ApiAdverts {
     @Consumes(MediaType.APPLICATION_JSON)
     public List<Advert> index_v1() {
         logger.debug("api|v1|GET /adverts");
-//        return adverts.search("", "");
-        return Lists.newArrayList();
+        return adverts.search("", "");
     }
 
 //    @GET
