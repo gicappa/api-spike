@@ -111,3 +111,5 @@ Gli errori di 404 non devono essere mandati a html se la request non avviene da 
 File upload
 
 Servire risorse statiche
+
+http://stackoverflow.com/questions/3459795/how-to-choose-between-jersey-apache-wink-and-jboss-resteasy
