@@ -6,18 +6,11 @@ import com.eclipsesource.restfuse.Method;
 import com.eclipsesource.restfuse.Response;
 import com.eclipsesource.restfuse.annotation.Context;
 import com.eclipsesource.restfuse.annotation.HttpTest;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import jobengine.app.utils.WebServer;
 import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
-
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertThat;
 
 
 @RunWith(HttpJUnitRunner.class)
@@ -33,14 +26,14 @@ public class OAuth2Test {
     @Ignore
     @HttpTest(method = Method.POST, path = "/oauth/token?client_secret=secret&grant_type=password&username=demo&password=1234")
     public void it_return_a_token_when_asked_for_it() {
-        AccessToken token = gson().fromJson(response.getBody(), AccessToken.class);
-
-        assertThat(token.accessToken, is(not(null)));
+//        AccessToken token = gson().fromJson(response.getBody(), AccessToken.class);
+//
+//        assertThat(token.accessToken, is(not(null)));
     }
 
-    private Gson gson() {
-        return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-    }
+//    private Gson gson() {
+//        return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+//    }
 
     @SuppressWarnings("unused")
     class AccessToken {
