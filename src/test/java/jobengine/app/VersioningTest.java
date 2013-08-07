@@ -22,6 +22,7 @@ import static org.junit.Assert.assertThat;
 @TestExecutionListeners(MockResteasyTestExecutionListener.class)
 public class VersioningTest {
 
+    // automagically injected by the MockResteasyTestExecutionListener
     public Rest rest;
 
     @Test
@@ -31,6 +32,4 @@ public class VersioningTest {
         assertThat(res.getStatus(), is(HttpServletResponse.SC_OK));
         assertThat(res.getContentAsString(), is(notNullValue()));
     }
-
-
 }
