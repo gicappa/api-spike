@@ -34,7 +34,6 @@ public class VersioningTest {
     }
 
     @Test
-    @ResteasyBean(beanName = "apiAdverts", beanClass = ApiAdverts.class)
     public void when_media_type_is_json_accept_is_specified_return_json() throws Exception {
         response = rest.process(get("/adverts").accept(MediaType.APPLICATION_JSON));
         expectContentType(response, MediaType.APPLICATION_JSON);

@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
 
@@ -16,9 +15,13 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
 
     private Dispatcher dispatcher;
 
+
+    private ApiBeanDescriptor beanDescriptor;
+
     @Override
-    public void beforeTestClass(TestContext testContext) throws Exception {
-        super.beforeTestClass(testContext);
+    public void beforeTestClass(TestContext testCtx) throws Exception {
+        super.beforeTestClass(testCtx);
+        beanDescriptor = new ApiBeanDescriptor(classAnnotation(testCtx));
     }
 
     @Override
@@ -31,13 +34,18 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
         super.beforeTestClass(testCtx);
 
         ApplicationContext ctx = testCtx.getApplicationContext();
-        ResteasyBean annotation = fetchAnnotation(testCtx);
 
-        Assert.notNull(annotation, "a @ResteasyBean annotation MUST be specified at class or method level");
-
-        setupResteasySpringIntegration(ctx, annotation.beanName(), annotation.beanClass());
+        setupResteasySpringIntegration(ctx, getBeanName(testCtx), getBeanClass(testCtx));
 
         injectDispatcherInto(testCtx.getTestInstance());
+    }
+
+    private Class<?> getBeanClass(TestContext testCtx) {
+        return beanDescriptor.beanClass(methodAnnotation(testCtx));
+    }
+
+    private String getBeanName(TestContext testCtx) {
+        return beanDescriptor.beanName(methodAnnotation(testCtx));
     }
 
     private void injectDispatcherInto(Object bean) throws IllegalAccessException {
@@ -57,15 +65,14 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
         return !field.getType().equals(Rest.class);
     }
 
-    private ResteasyBean fetchAnnotation(TestContext testContext) {
+    private ResteasyBean methodAnnotation(TestContext testContext) {
         return testContext.getTestMethod().getAnnotation(ResteasyBean.class);
+    }
+    private ResteasyBean classAnnotation(TestContext testContext) {
+        return testContext.getTestClass().getAnnotation(ResteasyBean.class);
     }
 
     private void setupResteasySpringIntegration(ApplicationContext context, String beanName, Class<?> beanClass) {
-        Assert.notNull(beanClass, "the specified beanClass in @ResteasyBean can't be null");
-        Assert.notNull(beanName, "the specified beanName in @ResteasyBean can't be null");
-        Assert.isTrue(!beanName.isEmpty(), "the specified beanName in @ResteasyBean can't be null");
-
         dispatcher = MockDispatcherFactory.createDispatcher();
         SpringBeanProcessor processor = new SpringBeanProcessor(dispatcher, null, null);
         ((ConfigurableApplicationContext) context).addBeanFactoryPostProcessor(processor);
