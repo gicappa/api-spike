@@ -16,6 +16,7 @@ import java.util.List;
 public class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
+
     @Autowired
     private Adverts adverts;
 
