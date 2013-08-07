@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
 
@@ -28,12 +29,15 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
     @Override
     public void beforeTestMethod(TestContext testCtx) throws Exception {
         super.beforeTestClass(testCtx);
+
         ApplicationContext ctx = testCtx.getApplicationContext();
         ResteasyBean annotation = fetchAnnotation(testCtx);
-        Object testInstance = testCtx.getTestInstance();
 
-        setupResteasySpringIntegration(ctx, annotation);
-        injectDispatcherInto(testInstance);
+        Assert.notNull(annotation, "a @ResteasyBean annotation MUST be specified at class or method level");
+
+        setupResteasySpringIntegration(ctx, annotation.beanName(), annotation.beanClass());
+
+        injectDispatcherInto(testCtx.getTestInstance());
     }
 
     private void injectDispatcherInto(Object bean) throws IllegalAccessException {
@@ -57,11 +61,15 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
         return testContext.getTestMethod().getAnnotation(ResteasyBean.class);
     }
 
-    private void setupResteasySpringIntegration(ApplicationContext context, ResteasyBean annotation) {
+    private void setupResteasySpringIntegration(ApplicationContext context, String beanName, Class<?> beanClass) {
+        Assert.notNull(beanClass, "the specified beanClass in @ResteasyBean can't be null");
+        Assert.notNull(beanName, "the specified beanName in @ResteasyBean can't be null");
+        Assert.isTrue(!beanName.isEmpty(), "the specified beanName in @ResteasyBean can't be null");
+
         dispatcher = MockDispatcherFactory.createDispatcher();
         SpringBeanProcessor processor = new SpringBeanProcessor(dispatcher, null, null);
         ((ConfigurableApplicationContext) context).addBeanFactoryPostProcessor(processor);
-        SpringResourceFactory noDefaults = new SpringResourceFactory(annotation.beanName(), context, annotation.beanClass());
+        SpringResourceFactory noDefaults = new SpringResourceFactory(beanName, context, beanClass);
         dispatcher.getRegistry().addResourceFactory(noDefaults);
     }
 
