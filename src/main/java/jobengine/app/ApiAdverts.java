@@ -21,19 +21,20 @@ public class ApiAdverts {
     private Adverts adverts;
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
+    @Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
     public List<Advert> index_v1() {
         logger.debug("api|v1|GET /adverts");
         return adverts.search("", "");
     }
 
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public List<Advert> index_alpha(String what, String where) {
-//        logger.debug("api|alpha|GET /adverts");
-//        return adverts.search(what, where);
-//    }
+    @GET
+    @Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.alpha+json"})
+    @Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.alpha+json"})
+    public List<Advert> index_alpha() {
+        logger.debug("api|alpha|GET /adverts");
+        return adverts.search("", "");
+    }
 
     @GET
     @Path("/{id}")

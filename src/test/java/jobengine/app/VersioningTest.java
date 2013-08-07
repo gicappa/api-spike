@@ -39,11 +39,22 @@ public class VersioningTest {
         expectContentType(response, MediaType.APPLICATION_JSON);
     }
 
+    @Test
+    public void when_json_accept_is_specified_return_version_v1() throws Exception {
+        response = rest.process(get("/adverts").accept("application/vnd.jobrapido.v1+json"));
+        expectContentType(response, "application/vnd.jobrapido.v1+json");
+    }
+
+    @Test
+    public void when_media_type_is_alpha_json_accept_is_specified_return_json() throws Exception {
+        response = rest.process(get("/adverts").accept("application/vnd.jobrapido.alpha+json"));
+        expectContentType(response, "application/vnd.jobrapido.alpha+json");
+    }
+
     private void expectContentType(MockHttpResponse res, String contentType) {
         assertThat(res.getStatus(), is(HttpServletResponse.SC_OK));
         assertThat(res.getOutputHeaders().getFirst("Content-Type").toString(), is(contentType));
     }
-//
 //    @Test
 //    public void when_no_media_type_is_specified_return_json() throws Exception {
 //        rest.perform(get("/adverts")).andExpect(content().contentType("application/json;charset=utf-8"));
