@@ -33,7 +33,7 @@
     <!--</bean>-->
 
 
-    <context:annotation-config />
+    <context:annotation-config/>
     <context:component-scan base-package="jobengine.domain"/>
     <context:component-scan base-package="jobengine.app"/>
     <context:component-scan base-package="jobengine.infrastructure"/>

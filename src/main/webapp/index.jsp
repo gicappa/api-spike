@@ -10,10 +10,12 @@
             font-family: "Helvetica Rounded Bold", "Helvetica";
             font-weight: bold;
         }
+
         .navbar .job {
             color: black;
 
         }
+
         .navbar .rapido {
             color: #2889c2;
         }
@@ -32,7 +34,9 @@
 <div class="container">
     <div class="hero-unit">
         <h1>Jobengine API</h1>
+
         <h2>API layer to access Jobengine services</h2>
+
         <p><em>0.0.1 alpha</em></p>
     </div>
 </div>
