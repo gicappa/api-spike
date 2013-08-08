@@ -65,6 +65,7 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
     private ResteasyBean methodAnnotation(TestContext testContext) {
         return testContext.getTestMethod().getAnnotation(ResteasyBean.class);
     }
+
     private ResteasyBean classAnnotation(TestContext testContext) {
         return testContext.getTestClass().getAnnotation(ResteasyBean.class);
     }

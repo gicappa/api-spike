@@ -22,7 +22,6 @@ import static org.jboss.resteasy.mock.MockHttpRequest.get;
 @ResteasyBean(beanName = "apiAdverts", beanClass = ApiAdverts.class)
 public class MockVersioningTest {
 
-    // automagically injected by the MockResteasyTestExecutionListener
     public Rest rest;
 
     @Autowired
@@ -38,6 +37,26 @@ public class MockVersioningTest {
             will(returnValue(newArrayList()));
         }});
         rest.process(get("/adverts").accept("application/vnd.jobrapido.alpha+json"));
+        context.assertIsSatisfied();
+
+    }
+    @Test
+    public void when_media_type_is_v1_search_has_been_called() throws Exception {
+        context.checking(new Expectations() {{
+            oneOf(adverts).search(with(any(String.class)), with(any(String.class)));
+            will(returnValue(newArrayList()));
+        }});
+        rest.process(get("/adverts").accept("application/vnd.jobrapido.v1+json"));
+        context.assertIsSatisfied();
+    }
+
+    @Test
+    public void when_no_media_type_is_provided_search_has_been_called() throws Exception {
+        context.checking(new Expectations() {{
+            oneOf(adverts).search(with(any(String.class)), with(any(String.class)));
+            will(returnValue(newArrayList()));
+        }});
+        rest.process(get("/adverts"));
         context.assertIsSatisfied();
 
     }
