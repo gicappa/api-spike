@@ -15,7 +15,6 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
 
     private Dispatcher dispatcher;
 
-
     private ApiBeanDescriptor beanDescriptor;
 
     @Override
@@ -34,9 +33,7 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
         super.beforeTestClass(testCtx);
 
         ApplicationContext ctx = testCtx.getApplicationContext();
-
         setupResteasySpringIntegration(ctx, getBeanName(testCtx), getBeanClass(testCtx));
-
         injectDispatcherInto(testCtx.getTestInstance());
     }
 

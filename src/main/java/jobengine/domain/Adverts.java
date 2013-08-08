@@ -8,6 +8,8 @@ import java.util.List;
 public interface Adverts {
     List<Advert> search(String what, String where);
 
+    List<Advert> search_alpha(String what, String where);
+
     List<Advert> search(String what, String where, Integer radius);
 
     List<Advert> search(String what, String where, Integer radius, Page page);
@@ -21,6 +23,10 @@ public interface Adverts {
         private AdvertsPersistence advertsPersistence;
 
         public List<Advert> search(String what, String where) {
+            return advertsPersistence.find();
+        }
+
+        public List<Advert> search_alpha(String what, String where) {
             return advertsPersistence.find();
         }
 

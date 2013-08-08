@@ -15,10 +15,11 @@ import java.util.List;
 @Path("/adverts")
 public class ApiAdverts {
 
-    private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
-
     @Autowired
     private Adverts adverts;
+
+    private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
+
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
@@ -33,7 +34,7 @@ public class ApiAdverts {
     @Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.alpha+json"})
     public List<Advert> index_alpha() {
         logger.debug("api|alpha|GET /adverts");
-        return adverts.search("", "");
+        return adverts.search_alpha("", "");
     }
 
     @GET
