@@ -33,7 +33,9 @@
 
     <context-param>
         <param-name>resteasy.resources</param-name>
-        <param-value>com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON,com.wordnik.swagger.jaxrs.listing.ApiListingResourceXML</param-value>
+        <param-value>
+            com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON,com.wordnik.swagger.jaxrs.listing.ApiListingResourceXML
+        </param-value>
     </context-param>
 
     <filter>
@@ -55,6 +57,16 @@
     </listener>
 
     <servlet>
+        <servlet-name>swagger-bootstrap</servlet-name>
+        <servlet-class>jobengine.app.swagger.Bootstrap</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>swagger-bootstrap</servlet-name>
+        <url-pattern>/swagger-bootstrap/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>api</servlet-name>
         <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
         <init-param>
@@ -67,7 +79,7 @@
         </init-param>
         <init-param>
             <param-name>swagger.api.basepath</param-name>
-            <param-value>http://localhost:8080/api-spike/docs</param-value>
+            <param-value>http://localhost:8080/api-spike/api/docs</param-value>
         </init-param>
     </servlet>
 

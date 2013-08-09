@@ -16,7 +16,6 @@ import java.util.List;
 @Component
 @Path("/adverts")
 @Api(value = "/adverts",  description = "adverts description")
-
 @Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
 @Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
 public class ApiAdverts {
