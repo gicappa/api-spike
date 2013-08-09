@@ -21,6 +21,11 @@
         <param-value>jobengine.app.request.HeaderRequestFilter,jobengine.app.request.HeaderResponseFilter</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/api</param-value>
+    </context-param>
+
     <filter>
         <filter-name>etagFilter</filter-name>
         <filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
@@ -31,11 +36,6 @@
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 
-
-    <!-- <context-param> <param-name>resteasy.scan</param-name> <param-value>true</param-value>
-     </context-param> -->
-
-    <!-- RESTEasy configuration -->
     <listener>
         <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
     </listener>
@@ -43,11 +43,6 @@
     <listener>
         <listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
     </listener>
-
-    <context-param>
-        <param-name>resteasy.servlet.mapping.prefix</param-name>
-        <param-value>/api</param-value>
-    </context-param>
 
     <servlet>
         <servlet-name>api</servlet-name>

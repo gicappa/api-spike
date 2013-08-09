@@ -25,7 +25,7 @@ public class HeaderResponseFilter implements ContainerResponseFilter {
     }
 
     private String acceptHeaderIn(ContainerRequestContext request) {
-        return request.getMediaType() == null ? "~/~" : request.getMediaType().toString();
+        return request.getHeaders().get("Accept") == null ? "~/~" : request.getHeaders().getFirst("Accept");
     }
 
 }
