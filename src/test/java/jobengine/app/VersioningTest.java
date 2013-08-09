@@ -29,8 +29,6 @@ public class VersioningTest {
     public static final MediaType MEDIA_TYPE_ALPHA_TYPE = MediaType.valueOf(MEDIA_TYPE_ALPHA);
     public static final String MEDIA_TYPE_V1 = "application/vnd.jobrapido.v1+json";
     public static final MediaType MEDIA_TYPE_V1_TYPE = MediaType.valueOf(MEDIA_TYPE_V1);
-
-
     public Rest rest;
     private MockHttpResponse response;
 
@@ -93,8 +91,17 @@ public class VersioningTest {
         assertThat(response.getOutputHeaders().getFirst("X-Jobrapido-Media-Type").toString(), is("alpha"));
     }
 
-//    @Test
-//    public void when_media_types_select_two_version_it_respond_406() throws Exception {
-//        rest.perform(get("/adverts").accept(MEDIA_TYPE_V1, MEDIA_TYPE_ALPHA)).andExpect(status().isNotAcceptable());
-//    }
+    @Test
+    public void when_media_types_select_two_version_it_respond_406() throws Exception {
+        response = rest.process(get("/adverts").accept(asList(MEDIA_TYPE_V1_TYPE, MEDIA_TYPE_ALPHA_TYPE)));
+        assertThat(response.getStatus(), is(406));
+    }
+
+    @Test
+    public void when_accept_has_many_types_on_the_same_row() throws Exception {
+        response = rest.process(get("/adverts").header("Accept", "application/json,application/xhtml+xml,text/html"));
+        assertThat(response.getOutputHeaders().getFirst("X-Jobrapido-Media-Type").toString(), is("v1"));
+
+
+    }
 }

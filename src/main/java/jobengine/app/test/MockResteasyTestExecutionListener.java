@@ -1,7 +1,12 @@
 package jobengine.app.test;
 
+import jobengine.app.ex.RestException;
 import jobengine.app.request.HeaderRequestFilter;
-import jobengine.app.request.HeaderResponseFilter;
+import jobengine.app.response.GenericExceptionHandler;
+import jobengine.app.response.HeaderResponseFilter;
+import jobengine.app.response.ObjectNotFoundExceptionHandler;
+import jobengine.app.response.RestExceptionHandler;
+import jobengine.domain.ObjectNotFoundException;
 import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.mock.MockDispatcherFactory;
 import org.jboss.resteasy.plugins.spring.SpringBeanProcessor;
@@ -79,6 +84,9 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
         SpringResourceFactory noDefaults = new SpringResourceFactory(beanName, context, beanClass);
         dispatcher.getProviderFactory().getContainerRequestFilterRegistry().registerSingleton(new HeaderRequestFilter());
         dispatcher.getProviderFactory().getContainerResponseFilterRegistry().registerSingleton(new HeaderResponseFilter());
+        dispatcher.getProviderFactory().getExceptionMappers().put(ObjectNotFoundException.class, new ObjectNotFoundExceptionHandler());
+        dispatcher.getProviderFactory().getExceptionMappers().put(RestException.class, new RestExceptionHandler());
+        dispatcher.getProviderFactory().getExceptionMappers().put(Throwable.class, new GenericExceptionHandler());
         dispatcher.getRegistry().addResourceFactory(noDefaults);
     }
 

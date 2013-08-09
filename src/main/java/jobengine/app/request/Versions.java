@@ -51,11 +51,13 @@ public class Versions {
         return versions.size() > 1;
     }
 
-    public static List<MediaType> mediaSubtypeListFrom(List<String> accept) {
-        List<MediaType> res = Lists.newArrayList();
-        for(String acc : accept)
-            res.add(MediaType.parseMediaType(acc));
-        return res;
+    public static List<MediaType> mediaSubtypeListFrom(List<String> accepts) {
+        List<MediaType> mediaTypes = Lists.newArrayList();
+
+        for(String accept : accepts)
+            mediaTypes.addAll(MediaType.parseMediaTypes(accept));
+
+        return mediaTypes;
     }
 
     public static Matcher versionMatcherOf(String mediaSubtype) {

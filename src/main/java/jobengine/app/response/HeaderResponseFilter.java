@@ -1,4 +1,4 @@
-package jobengine.app.request;
+package jobengine.app.response;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
@@ -7,9 +7,6 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @Provider
 public class HeaderResponseFilter implements ContainerResponseFilter {
@@ -20,15 +17,6 @@ public class HeaderResponseFilter implements ContainerResponseFilter {
         headers.putSingle("Server", "Jobrapido");
         headers.putSingle("Date", new Date().toString());
         headers.putSingle("Access-Control-Allow-Origin", "*");
-        headers.add("X-Jobrapido-Media-Type", extractVersionFrom(requestContext));
+        headers.add("X-Jobrapido-Media-Type", requestContext.getProperty("version"));
     }
-
-    private String extractVersionFrom(ContainerRequestContext request) {
-        return new Versions(acceptHeaderIn(request)).extract();
-    }
-
-    private List<String> acceptHeaderIn(ContainerRequestContext request) {
-        return request.getHeaders().get("Accept") == null ? asList("~/~") : request.getHeaders().get("Accept");
-    }
-
 }

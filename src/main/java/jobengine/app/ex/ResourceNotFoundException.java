@@ -1,11 +1,10 @@
 package jobengine.app.ex;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import javax.ws.rs.core.Response;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
+@RestHttpStatus(value = Response.Status.NOT_FOUND)
 @SuppressWarnings("unused")
-public class ResourceNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RestException {
 
     private static final long serialVersionUID = 42l; // Life, the universe, and everything
 

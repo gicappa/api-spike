@@ -1,11 +1,10 @@
 package jobengine.app.ex;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import javax.ws.rs.core.Response;
 
+@RestHttpStatus(value = Response.Status.NOT_ACCEPTABLE)
 @SuppressWarnings("unused")
-@ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
-public class NotAcceptableRequest extends RuntimeException {
+public class NotAcceptableRequest extends RestException {
 
     private static final long serialVersionUID = 42l; // Life, the universe, and everything
 

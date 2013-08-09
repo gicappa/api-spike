@@ -9,6 +9,9 @@ import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Provider;
 import java.util.Iterator;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 @Provider
 @PreMatching
@@ -18,7 +21,16 @@ public class HeaderRequestFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) {
         logDebugInformationsOn(requestContext);
+        requestContext.setProperty("version", extractVersionFrom(requestContext));
     }
+    private String extractVersionFrom(ContainerRequestContext request) {
+        return new Versions(acceptHeaderIn(request)).extract();
+    }
+
+    private List<String> acceptHeaderIn(ContainerRequestContext request) {
+        return request.getHeaders().get("Accept") == null ? asList("~/~") : request.getHeaders().get("Accept");
+    }
+
 
     private void logDebugInformationsOn(ContainerRequestContext request) {
         if (logger.isDebugEnabled()) {
