@@ -7,6 +7,9 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 @Provider
 public class HeaderResponseFilter implements ContainerResponseFilter {
@@ -24,8 +27,8 @@ public class HeaderResponseFilter implements ContainerResponseFilter {
         return new Versions(acceptHeaderIn(request)).extract();
     }
 
-    private String acceptHeaderIn(ContainerRequestContext request) {
-        return request.getHeaders().get("Accept") == null ? "~/~" : request.getHeaders().getFirst("Accept");
+    private List<String> acceptHeaderIn(ContainerRequestContext request) {
+        return request.getHeaders().get("Accept") == null ? asList("~/~") : request.getHeaders().get("Accept");
     }
 
 }
