@@ -31,6 +31,11 @@
         <param-value>/api</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>resteasy.resources</param-name>
+        <param-value>com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON,com.wordnik.swagger.jaxrs.listing.ApiListingResourceXML</param-value>
+    </context-param>
+
     <filter>
         <filter-name>etagFilter</filter-name>
         <filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
@@ -58,11 +63,11 @@
         </init-param>
         <init-param>
             <param-name>swagger.version</param-name>
-            <param-value>2.10</param-value>
+            <param-value>1.1</param-value>
         </init-param>
         <init-param>
             <param-name>swagger.api.basepath</param-name>
-            <param-value>http://localhost:8080/api-spike/doc</param-value>
+            <param-value>http://localhost:8080/api-spike/docs</param-value>
         </init-param>
     </servlet>
 
