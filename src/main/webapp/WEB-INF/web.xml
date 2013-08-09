@@ -22,8 +22,7 @@
             jobengine.app.request.HeaderRequestFilter,
             jobengine.app.response.HeaderResponseFilter,
             jobengine.app.response.ObjectNotFoundExceptionHandler,
-            jobengine.app.response.RestExceptionHandler,
-            jobengine.app.response.GenericExceptionHandler
+            jobengine.app.response.RestExceptionHandler
         </param-value>
     </context-param>
 

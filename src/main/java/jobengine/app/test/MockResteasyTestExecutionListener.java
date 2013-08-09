@@ -2,7 +2,6 @@ package jobengine.app.test;
 
 import jobengine.app.ex.RestException;
 import jobengine.app.request.HeaderRequestFilter;
-import jobengine.app.response.GenericExceptionHandler;
 import jobengine.app.response.HeaderResponseFilter;
 import jobengine.app.response.ObjectNotFoundExceptionHandler;
 import jobengine.app.response.RestExceptionHandler;
@@ -21,7 +20,6 @@ import java.lang.reflect.Field;
 public class MockResteasyTestExecutionListener extends DependencyInjectionTestExecutionListener {
 
     private Dispatcher dispatcher;
-
     private ApiBeanDescriptor beanDescriptor;
 
     @Override
@@ -86,7 +84,7 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
         dispatcher.getProviderFactory().getContainerResponseFilterRegistry().registerSingleton(new HeaderResponseFilter());
         dispatcher.getProviderFactory().getExceptionMappers().put(ObjectNotFoundException.class, new ObjectNotFoundExceptionHandler());
         dispatcher.getProviderFactory().getExceptionMappers().put(RestException.class, new RestExceptionHandler());
-        dispatcher.getProviderFactory().getExceptionMappers().put(Throwable.class, new GenericExceptionHandler());
+
         dispatcher.getRegistry().addResourceFactory(noDefaults);
     }
 

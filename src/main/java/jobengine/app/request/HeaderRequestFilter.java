@@ -23,6 +23,7 @@ public class HeaderRequestFilter implements ContainerRequestFilter {
         logDebugInformationsOn(requestContext);
         requestContext.setProperty("version", extractVersionFrom(requestContext));
     }
+
     private String extractVersionFrom(ContainerRequestContext request) {
         return new Versions(acceptHeaderIn(request)).extract();
     }

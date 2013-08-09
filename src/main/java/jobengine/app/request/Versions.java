@@ -54,7 +54,7 @@ public class Versions {
     public static List<MediaType> mediaSubtypeListFrom(List<String> accepts) {
         List<MediaType> mediaTypes = Lists.newArrayList();
 
-        for(String accept : accepts)
+        for (String accept : accepts)
             mediaTypes.addAll(MediaType.parseMediaTypes(accept));
 
         return mediaTypes;

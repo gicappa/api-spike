@@ -13,6 +13,8 @@ import java.util.List;
 
 @Component
 @Path("/adverts")
+@Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
+@Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
 public class ApiAdverts {
 
     @Autowired
@@ -20,10 +22,7 @@ public class ApiAdverts {
 
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
 
-
     @GET
-    @Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
-    @Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
     public List<Advert> index_v1() {
         logger.debug("api|v1|GET /adverts");
         return adverts.search("", "");
