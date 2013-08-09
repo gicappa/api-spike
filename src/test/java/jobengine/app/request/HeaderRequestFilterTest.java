@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class RestHeaderInterceptorTest {
+public class HeaderRequestFilterTest {
 
     @Test
     public void random_mdia_type_patterns_don_t_match() {

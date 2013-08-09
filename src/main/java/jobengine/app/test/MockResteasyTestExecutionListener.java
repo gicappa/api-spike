@@ -1,5 +1,7 @@
 package jobengine.app.test;
 
+import jobengine.app.request.HeaderRequestFilter;
+import jobengine.app.request.HeaderResponseFilter;
 import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.mock.MockDispatcherFactory;
 import org.jboss.resteasy.plugins.spring.SpringBeanProcessor;
@@ -75,6 +77,8 @@ public class MockResteasyTestExecutionListener extends DependencyInjectionTestEx
         SpringBeanProcessor processor = new SpringBeanProcessor(dispatcher, null, null);
         ((ConfigurableApplicationContext) context).addBeanFactoryPostProcessor(processor);
         SpringResourceFactory noDefaults = new SpringResourceFactory(beanName, context, beanClass);
+        dispatcher.getProviderFactory().getContainerRequestFilterRegistry().registerSingleton(new HeaderRequestFilter());
+        dispatcher.getProviderFactory().getContainerResponseFilterRegistry().registerSingleton(new HeaderResponseFilter());
         dispatcher.getRegistry().addResourceFactory(noDefaults);
     }
 

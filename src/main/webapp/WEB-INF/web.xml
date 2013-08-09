@@ -20,6 +20,7 @@
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 
+
     <!--<context-param>-->
         <!--<param-name>resteasy.media.type.param.mapping</param-name>-->
         <!--<param-value>contentType</param-value>-->
@@ -51,60 +52,16 @@
     <servlet>
         <servlet-name>api</servlet-name>
         <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+            <param-value>jobengine.app.request.HeaderRequestFilter</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>api</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
-
-
-
-
-
-
-
-
-
-
-    <!--<context-param>-->
-        <!--<param-name>contextConfigLocation</param-name>-->
-        <!--<param-value>classpath:applicationContext.xml</param-value>-->
-    <!--</context-param>-->
-
-    <!--<listener>-->
-        <!--<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>-->
-    <!--</listener>-->
-
-    <!--<listener>-->
-        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-    <!--</listener>-->
-
-    <!--<filter>-->
-        <!--<filter-name>api-filter</filter-name>-->
-        <!--<filter-class>org.jboss.resteasy.plugins.server.servlet.FilterDispatcher</filter-class>-->
-        <!--<init-param>-->
-            <!--<param-name>resteasy.scan</param-name>-->
-            <!--<param-value>true</param-value>-->
-        <!--</init-param>-->
-    <!--</filter>-->
-
-    <!--<filter-mapping>-->
-        <!--<filter-name>api-filter</filter-name>-->
-        <!--<url-pattern>/api/*</url-pattern>-->
-    <!--</filter-mapping>-->
-
-
-    <!--<servlet>-->
-        <!--<servlet-name>api</servlet-name>-->
-        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
-        <!--<load-on-startup>1</load-on-startup>-->
-    <!--</servlet>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>api</servlet-name>-->
-        <!--<url-pattern>/api/*</url-pattern>-->
-    <!--</servlet-mapping>-->
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

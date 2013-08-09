@@ -55,15 +55,12 @@ public class VersioningTest {
         assertThat(res.getStatus(), is(HttpServletResponse.SC_OK));
         assertThat(res.getOutputHeaders().getFirst("Content-Type").toString(), is(contentType));
     }
-//    @Test
-//    public void when_no_media_type_is_specified_return_json() throws Exception {
-//        rest.perform(get("/adverts")).andExpect(content().contentType("application/json;charset=utf-8"));
-//    }
-//
-//    @Test
-//    public void when_no_media_type_is_specified_return_version_v1() throws Exception {
-//        rest.perform(get("/adverts")).andExpect(header().string("X-Jobrapido-Media-Type", "v1"));
-//    }
+
+    @Test
+    public void when_no_media_type_is_specified_return_version_v1() throws Exception {
+        response = rest.process(get("/adverts").accept(MediaType.APPLICATION_JSON));
+        assertThat(response.getOutputHeaders().getFirst("X-Jobrapido-Media-Type").toString(), is("v1"));
+    }
 //
 //    @Test
 //    public void when_media_type_is_json_accept_is_specified_return_json() throws Exception {

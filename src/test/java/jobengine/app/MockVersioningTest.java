@@ -40,6 +40,7 @@ public class MockVersioningTest {
         context.assertIsSatisfied();
 
     }
+
     @Test
     public void when_media_type_is_v1_search_has_been_called() throws Exception {
         context.checking(new Expectations() {{

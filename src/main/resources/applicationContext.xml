@@ -9,7 +9,7 @@
     <!--<mvc:interceptors>-->
     <!--<mvc:interceptor>-->
     <!--<mvc:mapping path="/*"/>-->
-    <!--<bean class="jobengine.app.request.RestHeaderInterceptor"/>-->
+    <!--<bean class="jobengine.app.request.HeaderRequestFilter>-->
     <!--</mvc:interceptor>-->
     <!--</mvc:interceptors>-->
 
