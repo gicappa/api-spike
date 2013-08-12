@@ -10,4 +10,5 @@ import javax.ws.rs.Produces;
 @Api("/docs")
 @Produces({"application/json"})
 public class SwaggerApiListing extends ApiListingResourceJSON {
+
 }

@@ -19,12 +19,13 @@
     <context-param>
         <param-name>resteasy.providers</param-name>
         <param-value>
+            jobengine.app.JacksonJsonProvider,
+            com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider,
+            com.wordnik.swagger.jaxrs.listing.ResourceListingProvider,
             jobengine.app.request.HeaderRequestFilter,
             jobengine.app.response.HeaderResponseFilter,
             jobengine.app.response.ObjectNotFoundExceptionHandler,
-            jobengine.app.response.RestExceptionHandler,
-            com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider,
-            com.wordnik.swagger.jaxrs.listing.ResourceListingProvider
+            jobengine.app.response.RestExceptionHandler
         </param-value>
     </context-param>
 
@@ -36,8 +37,8 @@
     <context-param>
         <param-name>resteasy.resources</param-name>
         <param-value>
-            jobengine.app.ApiAdverts,
-            jobengine.app.SwaggerApiListing
+            jobengine.app.SwaggerApiListing,
+            jobengine.app.ApiAdverts
         </param-value>
     </context-param>
 
