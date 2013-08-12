@@ -4,38 +4,32 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
     <context:property-placeholder location="classpath:log4j.properties" ignore-unresolvable="true"/>
-
-    <!--<mvc:interceptors>-->
-    <!--<mvc:interceptor>-->
-    <!--<mvc:mapping path="/*"/>-->
-    <!--<bean class="jobengine.app.request.HeaderRequestFilter>-->
-    <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
-
-    <!--<bean id="contentNegotiationManager"-->
-    <!--class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">-->
-    <!--<property name="favorPathExtension" value="false"/>-->
-    <!--<property name="favorParameter" value="false"/>-->
-    <!--<property name="parameterName" value="format"/>-->
-    <!--<property name="ignoreAcceptHeader" value="false"/>-->
-    <!--<property name="useJaf" value="false"/>-->
-    <!--<property name="defaultContentType" value="application/json; charset=utf-8"/>-->
-
-    <!--<property name="mediaTypes">-->
-    <!--<map>-->
-    <!--<entry key="json" value="application/vnd.jobrapido.v1+json"/>-->
-    <!--<entry key="json" value="application/vnd.jobrapido.alpha+json"/>-->
-    <!--<entry key="json" value="application/json"/>-->
-    <!--<entry key="xml" value="application/xml"/>-->
-    <!--</map>-->
-    <!--</property>-->
-    <!--</bean>-->
-
-
     <context:annotation-config/>
     <context:component-scan base-package="jobengine.domain"/>
     <context:component-scan base-package="jobengine.app"/>
     <context:component-scan base-package="jobengine.infrastructure"/>
+
+    <!-- this scans the classes for resources -->
+    <bean id="swaggerConfig" class="com.wordnik.swagger.jaxrs.config.BeanConfig">
+        <property name="resourcePackage" value="jobengine.app"/>
+        <property name="version" value="1.0.2"/>
+        <property name="basePath" value="http://localhost:8080/api-spike/api/docs"/>
+        <property name="title" value="jobrapido"/>
+        <property name="description" value="Let's help jobseekers all over the world to find a job!"/>
+        <property name="contact" value="system@jobrapido.com"/>
+        <property name="license" value="Copyrighted"/>
+        <property name="licenseUrl" value="http://www.apache.org/licenses/LICENSE-2.0.html"/>
+        <property name="scan" value="false"/>
+        <property name="apiReader" value="com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader"/>
+    </bean>
+
+    <!-- Swagger API listing resource -->
+    <bean id="swaggerResourceJSON" class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON" />
+
+    <!-- Swagger writers -->
+    <bean id="resourceWriter" class="com.wordnik.swagger.jaxrs.listing.ResourceListingProvider" />
+    <bean id="apiWriter" class="com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider" />
 
 </beans>

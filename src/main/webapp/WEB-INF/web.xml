@@ -22,7 +22,9 @@
             jobengine.app.request.HeaderRequestFilter,
             jobengine.app.response.HeaderResponseFilter,
             jobengine.app.response.ObjectNotFoundExceptionHandler,
-            jobengine.app.response.RestExceptionHandler
+            jobengine.app.response.RestExceptionHandler,
+            com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider,
+            com.wordnik.swagger.jaxrs.listing.ResourceListingProvider
         </param-value>
     </context-param>
 
@@ -34,7 +36,8 @@
     <context-param>
         <param-name>resteasy.resources</param-name>
         <param-value>
-            jobengine.app.SwaggerApiListing,com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON,com.wordnik.swagger.jaxrs.listing.ApiListingResourceXML
+            jobengine.app.ApiAdverts,
+            jobengine.app.SwaggerApiListing
         </param-value>
     </context-param>
 
@@ -57,30 +60,8 @@
     </listener>
 
     <servlet>
-        <servlet-name>swagger-bootstrap</servlet-name>
-        <servlet-class>jobengine.app.swagger.Bootstrap</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>swagger-bootstrap</servlet-name>
-        <url-pattern>/swagger-bootstrap/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>api</servlet-name>
         <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
-        <init-param>
-            <param-name>api.version</param-name>
-            <param-value>0.1</param-value>
-        </init-param>
-        <init-param>
-            <param-name>swagger.version</param-name>
-            <param-value>1.1</param-value>
-        </init-param>
-        <init-param>
-            <param-name>swagger.api.basepath</param-name>
-            <param-value>http://localhost:8080/api-spike/api/docs</param-value>
-        </init-param>
     </servlet>
 
     <servlet-mapping>

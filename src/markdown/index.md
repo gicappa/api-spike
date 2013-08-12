@@ -116,3 +116,5 @@ http://stackoverflow.com/questions/3459795/how-to-choose-between-jersey-apache-w
 
 
 Gestione upload files
+
+Integrazione con JOBENGINE2

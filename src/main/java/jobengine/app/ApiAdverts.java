@@ -1,9 +1,6 @@
 package jobengine.app;
 
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
+import com.wordnik.swagger.annotations.*;
 import jobengine.domain.Advert;
 import jobengine.domain.Adverts;
 import org.slf4j.Logger;
@@ -28,14 +25,22 @@ public class ApiAdverts {
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
 
     @GET
-    @ApiOperation(value = "fetch all the adverts!", notes = "Add extra notes here")
-    @ApiResponses({@ApiResponse(code = 200, response = List.class, message = "index_v1")})
+    @ApiOperation(value = "fetch all the adverts", notes = "Add extra notes here", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Pet not found")
+    })
     public List<Advert> index_v1() {
         logger.debug("api|v1|GET /adverts");
         return adverts.search("", "");
     }
 
     @GET
+    @ApiOperation(value = "fetch all the adverts", notes = "Add extra notes here", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Pet not found")
+    })
     @Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.alpha+json"})
     @Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.alpha+json"})
     public List<Advert> index_alpha() {
@@ -45,7 +50,12 @@ public class ApiAdverts {
 
     @GET
     @Path("/{id}")
-    public Advert show(@PathParam("id") Long id) {
+    @ApiOperation(value = "fetch all the adverts", notes = "Add extra notes here", response = Advert.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Pet not found")
+    })
+    public Advert show(@ApiParam(value = "ID of pet to fetch", required = true) @PathParam("id") Long id) {
         logger.debug("api|GET /adverts/{}", id);
         return adverts.viewAdvert(id);
     }
