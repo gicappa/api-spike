@@ -2,6 +2,8 @@ package jobengine.app;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 import jobengine.domain.Advert;
 import jobengine.domain.Adverts;
 import org.slf4j.Logger;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @Component
 @Path("/adverts")
-@Api(value = "/adverts",  description = "adverts description")
+@Api(value = "/adverts", description = "adverts description")
 @Produces({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
 @Consumes({MediaType.APPLICATION_JSON, "application/vnd.jobrapido.v1+json"})
 public class ApiAdverts {
@@ -26,7 +28,8 @@ public class ApiAdverts {
     private Logger logger = LoggerFactory.getLogger(ApiAdverts.class);
 
     @GET
-    @ApiOperation(value = "index_v1", notes = "index_v1 notes")
+    @ApiOperation(value = "fetch all the adverts!", notes = "Add extra notes here")
+    @ApiResponses({@ApiResponse(code = 200, response = List.class, message = "index_v1")})
     public List<Advert> index_v1() {
         logger.debug("api|v1|GET /adverts");
         return adverts.search("", "");

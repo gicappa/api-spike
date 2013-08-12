@@ -34,7 +34,7 @@
     <context-param>
         <param-name>resteasy.resources</param-name>
         <param-value>
-            com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON,com.wordnik.swagger.jaxrs.listing.ApiListingResourceXML
+            jobengine.app.SwaggerApiListing,com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON,com.wordnik.swagger.jaxrs.listing.ApiListingResourceXML
         </param-value>
     </context-param>
 

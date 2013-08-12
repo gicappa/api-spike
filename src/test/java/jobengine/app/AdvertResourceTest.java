@@ -35,7 +35,7 @@ public class AdvertResourceTest {
     @Test
     public void when_http_verb_is_not_implemented_responds_405() throws Exception {
         response = rest.process(put("/adverts"));
-        assertThat(response.getStatus(), is(Response.Status.METHOD_NOT_ALLOWED.getStatusCode()));
+        assertThat(response.getStatus(), is(Response.Status.NOT_ACCEPTABLE.getStatusCode()));
     }
 
     @Test
