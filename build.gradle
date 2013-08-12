@@ -16,18 +16,24 @@ configurations {
 
 dependencies {
     compile 'org.springframework:spring-webmvc:3.2.3.RELEASE',
-            'com.mangofactory:swagger-springmvc:0.5.3',
-            'org.springframework.security.oauth:spring-security-oauth2:1.0.5.RELEASE'
-    providedCompile 'com.fasterxml.jackson.core:jackson-databind:2.2.2',
-            'javax.xml.bind:jaxb-api:2.2.9'
-
-    compile 'javax.servlet:javax.servlet-api:3.0.1'
-
-    testCompile 'junit:junit:4.11',
+            'com.fasterxml.jackson.core:jackson-databind:2.2.2',
+            'javax.xml.bind:jaxb-api:2.2.9',
+            'javax.servlet:javax.servlet-api:3.0.1',
+            'org.jboss.resteasy:resteasy-spring:3.0.2.Final',
+            'org.slf4j:slf4j-api:1.7.5',
+            'org.slf4j:slf4j-log4j12:1.7.5',
+            'com.google.guava:guava:14.0.1',
+            'org.jboss.resteasy:resteasy-jackson2-provider:3.0.2.Final',
+            'org.jboss.resteasy:resteasy-cache-core:3.0.2.Final',
+            'junit:junit:4.11',
             'org.springframework:spring-test:3.2.3.RELEASE',
-            'com.restfuse:com.eclipsesource.restfuse:1.2.0',
-            'com.google.code.gson:gson:2.2.4',
+            'org.jmock:jmock-legacy:2.6.0',
+            'com.wordnik:swagger-jaxrs_2.10:1.3.0-RC3',
+            'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.2.2'
+
+    testCompile  'com.restfuse:com.eclipsesource.restfuse:1.2.0',
             'org.eclipse.jetty:jetty-webapp:8.1.3.v20120416'
+
 }
 
 buildscript {

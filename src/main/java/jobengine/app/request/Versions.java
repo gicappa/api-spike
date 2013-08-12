@@ -14,7 +14,7 @@ public class Versions {
 
     private List<String> versions;
 
-    public Versions(String accept) {
+    public Versions(List<String> accept) {
         this.versions = toVersionsFromHeader(accept);
     }
 
@@ -26,7 +26,7 @@ public class Versions {
         return versions.get(0);
     }
 
-    private List<String> toVersionsFromHeader(String accept) {
+    private List<String> toVersionsFromHeader(List<String> accept) {
         versions = Lists.newArrayList();
 
         for (MediaType media : mediaSubtypeListFrom(accept)) {
@@ -37,7 +37,7 @@ public class Versions {
     }
 
     private void addToVersionsIfIsMatchedOn(String mediaSubtype) {
-         Matcher versionMatcher = versionMatcherOf(mediaSubtype);
+        Matcher versionMatcher = versionMatcherOf(mediaSubtype);
 
         if (versionMatcher.matches())
             versions.add(versionMatcher.group(1));
@@ -51,8 +51,13 @@ public class Versions {
         return versions.size() > 1;
     }
 
-    public static List<MediaType> mediaSubtypeListFrom(String accept) {
-        return MediaType.parseMediaTypes(accept);
+    public static List<MediaType> mediaSubtypeListFrom(List<String> accepts) {
+        List<MediaType> mediaTypes = Lists.newArrayList();
+
+        for (String accept : accepts)
+            mediaTypes.addAll(MediaType.parseMediaTypes(accept));
+
+        return mediaTypes;
     }
 
     public static Matcher versionMatcherOf(String mediaSubtype) {

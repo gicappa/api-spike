@@ -2,7 +2,7 @@ package jobengine.infrastructure;
 
 import jobengine.domain.Advert;
 import jobengine.domain.AdvertsPersistence;
-import jobengine.domain.ObjectNotFound;
+import jobengine.domain.ObjectNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class AdvertFakePersistence implements AdvertsPersistence {
         try {
             return find().get(id.intValue());
         } catch (Throwable t) {
-            throw new ObjectNotFound(format("Advert[id: %d] not existent", id), t);
+            throw new ObjectNotFoundException(format("Advert[id: %d] not existent", id), t);
         }
     }
 }

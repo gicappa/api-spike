@@ -4,14 +4,43 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="rest" version="3.0">
 
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    <!--  security measure to combat XXE attacks - see http://docs.jboss.org/resteasy/docs/2.3.6.Final/userguide/html/Content_Marshalling_Providers.html -->
+    <context-param>
+        <param-name>resteasy.document.expand.entity.references</param-name>
+        <param-value>false</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>resteasy.providers</param-name>
+        <param-value>
+            jobengine.app.JacksonJsonProvider,
+            com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider,
+            com.wordnik.swagger.jaxrs.listing.ResourceListingProvider,
+            jobengine.app.request.HeaderRequestFilter,
+            jobengine.app.response.HeaderResponseFilter,
+            jobengine.app.response.ObjectNotFoundExceptionHandler,
+            jobengine.app.response.RestExceptionHandler
+        </param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/api</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>resteasy.resources</param-name>
+        <param-value>
+            jobengine.app.SwaggerApiListing,
+            jobengine.app.ApiAdverts
+        </param-value>
+    </context-param>
 
     <filter>
         <filter-name>etagFilter</filter-name>
@@ -23,10 +52,17 @@
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 
+    <listener>
+        <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>api</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
     </servlet>
 
     <servlet-mapping>
