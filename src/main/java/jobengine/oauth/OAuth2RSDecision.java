@@ -1,5 +1,9 @@
 package jobengine.oauth;
 
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.apache.oltu.oauth2.common.message.types.ParameterStyle;
+import org.apache.oltu.oauth2.rs.request.OAuthAccessResourceRequest;
 import org.apache.oltu.oauth2.rsfilter.OAuthClient;
 import org.apache.oltu.oauth2.rsfilter.OAuthDecision;
 import org.slf4j.Logger;
@@ -20,26 +24,25 @@ public class OAuth2RSDecision implements OAuthDecision {
         this.realm = realm;
         this.token = token;
         this.request = request;
-
+        System.out.printf("realm: %s, token: %s", realm, token, request.getUserPrincipal());
         logger.debug("realm: %s, token: %s", realm, token);
     }
 
     @Override
     public boolean isAuthorized() {
-        return checkAuthorization();
-    }
+        try {
+            OAuthAccessResourceRequest oauthRequest = new OAuthAccessResourceRequest(request, ParameterStyle.HEADER);
 
-    private boolean checkAuthorization() {
-        return true;
+            return ClientOAuthInfo.ACCESS_TOKEN_VALID.equals(oauthRequest.getAccessToken());
+        } catch (Exception e) {
+            logger.error("Error while verifying OAuth access token", e);
+            return false;
+        }
     }
 
     @Override
     public Principal getPrincipal() {
-        return fetchPrincipal();
-    }
-
-    private Principal fetchPrincipal() {
-        return new OAuth2RSPrincipal("principal_id");
+        return request.getUserPrincipal();
     }
 
     @Override
