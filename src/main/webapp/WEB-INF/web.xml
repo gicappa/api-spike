@@ -38,9 +38,45 @@
         <param-name>resteasy.resources</param-name>
         <param-value>
             jobengine.app.SwaggerApiListing,
+            jobengine.oauth.RegistrationEndpoint,
+            jobengine.oauth.AuthEndpoint,
+            jobengine.oauth.TokenEndpoint,
+            jobengine.oauth.ResourceQueryEndpoint,
+            jobengine.oauth.ResourceBodyEndpoint,
+            jobengine.oauth.ResourceHeaderEndpoint,
             jobengine.app.ApiAdverts
         </param-value>
     </context-param>
+
+    <context-param>
+        <param-name>oauth.rs.provider-class</param-name>
+        <param-value>jobengine.oauth.OAuthRSProvider</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>oauth.provider.tokens.request</param-name>
+        <param-value>/token</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>oauth.provider.tokens.access</param-name>
+        <param-value>/auth</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>oauth.rs.tokens</param-name>
+        <param-value>HEADER</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>authFilter</filter-name>
+        <filter-class>org.apache.oltu.oauth2.rsfilter.OAuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>authFilter</filter-name>
+        <url-pattern>/api/adverts</url-pattern>
+    </filter-mapping>
 
     <filter>
         <filter-name>etagFilter</filter-name>

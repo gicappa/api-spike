@@ -29,9 +29,17 @@ dependencies {
             'org.springframework:spring-test:3.2.3.RELEASE',
             'org.jmock:jmock-legacy:2.6.0',
             'com.wordnik:swagger-jaxrs_2.10:1.3.0-RC3',
-            'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.2.2'
+            'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.2.2',
+            'org.apache.oltu.oauth2:org.apache.oltu.oauth2.authzserver:0.31',
+            'org.apache.oltu.oauth2:org.apache.oltu.oauth2.resourceserver:0.31',
+            'org.apache.oltu.oauth2:org.apache.oltu.oauth2.resourceserver-filter:0.31',
+            'org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.server:0.31',
+            'org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.common:0.31'
+//            'org.apache.oltu:oltu-oauth2-authzserver:0.31',
+//            'org.apache.oltu:oltu-oauth2-resourceserver:0.31',
+//            'org.apache.oltu:oltu-oauth2-dynamicreg-server:0.31'
 
-    testCompile  'com.restfuse:com.eclipsesource.restfuse:1.2.0',
+            testCompile  'com.restfuse:com.eclipsesource.restfuse:1.2.0',
             'org.eclipse.jetty:jetty-webapp:8.1.3.v20120416'
 
 }
